@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @desc Spring Boot 测试
  **/
 @RestController
-@EnableAutoConfiguration
+//@EnableAutoConfiguration
 public class TestContoller {
   @RequestMapping("/hello")
   public String hello(){
     return "hello";
   }
-  public static void main(String[] args){
+  /*public static void main(String[] args){
     //运行
     SpringApplication.run(TestContoller.class,args);
-  }
+  }*/
 }
