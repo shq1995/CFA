@@ -50,19 +50,19 @@
 		<div class="container-fluid">
 			<div class="row">
 				<!--引入侧边栏-->
-				<div th:replace="commons/bar::#sidebar(activeUri='users')"></div>
+				<div th:replace="commons/bar::#sidebar(activeUri='file')"></div>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 					<!--需要区分是员工修改还是添加；-->
-					<form th:action="@{/user}" method="post">
+					<form th:action="@{/file}" method="post">
 						<!--发送put请求修改员工数据-->
 						<!--
 						1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）
 						2、页面创建一个post表单
 						3、创建一个input项，name="_method";值就是我们指定的请求方式
 						-->
-						<input type="hidden" name="_method" value="put" th:if="${user!=null}"/>
-						<input type="hidden" name="id" th:if="${user!=null}" th:value="${user.id}">
+						<input type="hidden" name="_method" value="put" th:if="${file!=null}"/>
+						<input type="hidden" name="id" th:if="${file!=null}" th:value="${file.id}">
 						<div class="form-group">
 							<div class="form-group">
 								<label>姓名</label>

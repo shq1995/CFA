@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 /**
  * @author shuihuaqi
@@ -45,7 +47,10 @@ public class FilesServiceImpl implements FilesService {
 		return filesRepository.findOne(id);
 	}
 
+	@Override
+	public List<Files> listFiles() {
+		return filesRepository.findAll();
+	}
 
- 
 
 }

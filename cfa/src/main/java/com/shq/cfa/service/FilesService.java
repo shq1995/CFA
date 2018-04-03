@@ -1,15 +1,14 @@
 package com.shq.cfa.service;
 
 import com.shq.cfa.entity.Files;
-import com.shq.cfa.entity.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 
- /**
+/**
  * @author shuihuaqi
  * @create 2018-03-27 10:32
- * @desc Blog 服务接口
+ * @desc 案件 服务接口
  **/
 public interface FilesService {
 	/**
@@ -39,5 +38,7 @@ public interface FilesService {
 	 * @return
 	 */
 	Files getFileById(Integer id);
+
+	 List<Files> listFiles();
 
 }

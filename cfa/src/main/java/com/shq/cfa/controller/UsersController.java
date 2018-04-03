@@ -27,10 +27,6 @@ public class UsersController {
     //查询所有人员返回列表页面
     @GetMapping("/users")
     public String  list(Model model){
-        //Pageable pageable = new PageRequest(pageIndex, pageSize);
-        //Page<User> page = userService.listUsersByNameLike(name, pageable);
-        //List<User> list = page.getContent();	// 当前所在页面数据列表
-        //model.addAttribute("page", page);
         List<User> users = userService.listUsers();
 
         //放在请求域中
@@ -43,9 +39,7 @@ public class UsersController {
     //来到员工添加页面
     @GetMapping("/user")
     public String toAddPage(Model model){
-        //来到添加页面,查出所有的部门，在页面显示
-        Collection<Authority> authoritys = authorityService.listAuthoritys();
-        model.addAttribute("authoritys",authoritys);
+
         return "user/add";
     }
 
@@ -84,7 +78,7 @@ public class UsersController {
 
     //员工修改；需要提交员工id；
     @PutMapping("/user")
-    public String updateEmployee(User user,BindingResult bindingResult){
+    public String updateUser(User user,BindingResult bindingResult){
         System.out.println("修改的人员数据："+user);
         userService.saveUser(user);
         return "redirect:/users";
@@ -92,7 +86,7 @@ public class UsersController {
 
     //员工删除
     @DeleteMapping("/user/{id}")
-    public String deleteEmployee(@PathVariable("id") Integer id){
+    public String deleteUser(@PathVariable("id") Integer id){
         userService.removeUser(id);
         return "redirect:/users";
     }
