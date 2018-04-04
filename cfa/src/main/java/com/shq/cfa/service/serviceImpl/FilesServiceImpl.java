@@ -52,5 +52,25 @@ public class FilesServiceImpl implements FilesService {
 		return filesRepository.findAll();
 	}
 
+	@Override
+	public List<Files> findByType(String type) {
+		return filesRepository.findByType(type);
+	}
+
+	@Override
+	public List<Files> findByTitleLike(String title) {
+		return filesRepository.findByTitleLike(title);
+	}
+
+	@Override
+	public List<Files> findBySourceLike(String source) {
+		return filesRepository.findBySourceLike(source);
+	}
+
+	@Override
+	public List<Files> findByAccuserLike(String accuser) {
+		return filesRepository.findByAccuserLike(accuser);
+	}
+
 
 }

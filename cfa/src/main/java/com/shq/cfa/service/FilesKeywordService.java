@@ -15,5 +15,6 @@ public interface FilesKeywordService {
   List<FilesKeyword> findAll();
 
   List<FilesKeyword> findByTypeLike(String type);
+  void  removeFilesKeyword(Integer id);
 
 }

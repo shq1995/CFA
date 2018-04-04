@@ -5,10 +5,12 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -25,89 +27,99 @@ public class Files implements Serializable {
 	@Id // 主键
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
 	private Integer id; // 案件的唯一标识
-	
-	@NotEmpty(message = "标题不能为空")
+
+	@NotBlank(message = "标题不能为空")
 	@Size(min=2, max=50)
 	@Column(nullable = false, length = 50) // 映射为字段，值不能为空
 	private String title;
 
-	@NotEmpty(message = "案号不能为空")
+	@NotBlank(message = "关键字不能为空")
+	@Size(min=2)
+	@Column(nullable = false) // 映射为字段，值不能为空
+	private String keyword;
+
+	@Column
+	private String type;
+
+	@NotBlank(message = "案号不能为空")
 	@Size(min=2, max=50)
 	@Column(nullable = false, length = 50) // 映射为字段，值不能为空
 	private String number;
 
-	@NotEmpty(message = "收诉状日期不能为空")
-	@Column(nullable = false) // 映射为字段，值不能为空
-	private Date put_date;
+	@NotNull(message = "收诉状日期不能为空")
+	@Temporal(TemporalType.DATE)// 映射为字段，值不能为空
+	private Date putDate;
 
-	@NotEmpty(message = "负责人不能为空")
+	@NotBlank(message = "负责人不能为空")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String principal;
 
-	@NotEmpty(message = "原告不能为空")
+	@NotBlank(message = "原告不能为空")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String accuser;
 
-	@NotEmpty(message = "被告不能为空")
+	@NotBlank(message = "被告不能为空")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String defendant;
 
-	@NotEmpty(message = "承办人不能为空")
+	@NotBlank(message = "承办人不能为空")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String agent;
 
-	@NotEmpty(message = "承办部门不能为空")
+	@NotBlank(message = "承办部门不能为空")
 	@Column(nullable = false) // 映射为字段，值不能为空
-	private String agent_department;
+	private String agentDepartment;
 
 	@NotEmpty(message = "承办时间不能为空")
 	@Column(nullable = false) // 映射为字段，值不能为空
-	private Date agent_date;
+	@Temporal(TemporalType.DATE)
+	private Date agentDate;
 
-	@NotEmpty(message = "案件来源不能为空")
+	@NotNull(message = "案件来源不能为空")
 	@Column(nullable = false) // 映射为字段，值不能为空
-	private Date source;
+	private String source;
 
-	@NotEmpty(message = "诉讼请求不能为空")
+	@NotBlank(message = "诉讼请求不能为空")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String request;
 
-	@NotEmpty(message = "起诉次数不能为空")
+	@NotNull(message = "起诉次数不能为空")
 	@Column(nullable = false) // 映射为字段，值不能为空
-	private String frequency;
+	private Integer frequency;
 
-	@NotEmpty(message = "立案案由不能为空")
+	@NotBlank(message = "立案案由不能为空")
 	@Column(nullable = false) // 映射为字段，值不能为空
-	private String start_cause;
+	private String startCause;
 
-	@NotEmpty(message = "立案案由不能为空")
+	@NotBlank(message = "立案案由描述不能为空")
 	@Column(nullable = false) // 映射为字段，值不能为空
-	private String start_desc;
+	private String startDesc;
 
 	@NotEmpty(message = "结案时间不能为空")
 	@Column(nullable = false) // 映射为字段，值不能为空
-	private Date end_time;
+	@Temporal(TemporalType.DATE)
+	private Date endTime;
 
-	@NotEmpty(message = "结案案由不能为空")
+	@NotBlank(message = "结案案由不能为空")
 	@Column(nullable = false) // 映射为字段，值不能为空
-	private String end_case;
+	private String endCase;
 
-	@NotEmpty(message = "结案案由不能为空")
+	@NotBlank(message = "结案案由描述不能为空")
 	@Column(nullable = false) // 映射为字段，值不能为空
-	private String end_desc;
+	private String endDesc;
 
-	@NotEmpty(message = "受理费不能为空")
+	@NotBlank(message = "受理费不能为空")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String pay;
 
-	@NotEmpty(message = "案件特征不能为空")
+	@NotBlank(message = "案件特征不能为空")
 	@Size(min=2, max=300)
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String summary;
 
 	@Lob  // 大对象，映射 MySQL 的 Long Text 类型
 	@Basic(fetch=FetchType.LAZY) // 懒加载
-	@NotEmpty(message = "案件描述内容不能为空")
+	@NotBlank(message = "案件描述内容不能为空")
 	@Size(min=2)
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String content;
@@ -126,29 +138,30 @@ public class Files implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Files(String title, String number, Date put_date, String principal, String accuser, String defendant, String agent, String agent_department, Date agent_date, Date source, String request, String frequency, String start_cause, String start_desc, Date end_time, String end_case, String end_desc, String pay, String summary, String content, Timestamp createTime, Timestamp updateTime) {
+	public Files(String title, String keyword, String type, String number, Date putDate, String principal, String accuser, String defendant, String agent, String agentDepartment, Date agentDate, String source, String request, Integer frequency, String startCause, String startDesc, Date endTime, String endCase, String endDesc, String pay, String summary, String content, Date createTime, Date updateTime) {
 		this.title = title;
+		this.keyword = keyword;
+		this.type = type;
 		this.number = number;
-		this.put_date = put_date;
+		this.putDate = putDate;
 		this.principal = principal;
 		this.accuser = accuser;
 		this.defendant = defendant;
 		this.agent = agent;
-		this.agent_department = agent_department;
-		this.agent_date = agent_date;
+		this.agentDepartment = agentDepartment;
+		this.agentDate = agentDate;
 		this.source = source;
 		this.request = request;
 		this.frequency = frequency;
-		this.start_cause = start_cause;
-		this.start_desc = start_desc;
-		this.end_time = end_time;
-		this.end_case = end_case;
-		this.end_desc = end_desc;
+		this.startCause = startCause;
+		this.startDesc = startDesc;
+		this.endTime = endTime;
+		this.endCase = endCase;
+		this.endDesc = endDesc;
 		this.pay = pay;
 		this.summary = summary;
 		this.content = content;
 		this.createTime = createTime;
 		this.updateTime = updateTime;
-
 	}
 }

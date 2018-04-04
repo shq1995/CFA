@@ -36,7 +36,7 @@ public class FilesKeyword {
   @Column(nullable = false, length = 50) // 映射为字段，值不能为空
   private String keyword;
 
-  @NotNull(message = "关键字不能为空")
+  @NotNull(message = "关键字权重不能为空")
   @Column(nullable = false) // 映射为字段，值不能为空
   private Integer weight;
 
@@ -46,7 +46,7 @@ public class FilesKeyword {
   private Date createTime;
 
   @Temporal(TemporalType.TIMESTAMP)
-  @org.hibernate.annotations.CreationTimestamp  // 由数据库自动创建时间
+  @org.hibernate.annotations.UpdateTimestamp // 由数据库自动创建时间
   private Date updateTime;
 
   public FilesKeyword() {

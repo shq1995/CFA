@@ -6,6 +6,7 @@ import com.shq.cfa.service.FilesKeywordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public class FilesKeywordServiceImpl implements FilesKeywordService{
   public FilesKeyword findOne(Integer id) {
     return repository.findOne(id);
   }
-
+  @Transactional
   @Override
   public FilesKeyword save(FilesKeyword filesKeyword) {
     return repository.save(filesKeyword);
@@ -41,5 +42,10 @@ public class FilesKeywordServiceImpl implements FilesKeywordService{
   @Override
   public List<FilesKeyword> findByTypeLike(String type) {
     return repository.findByTypeLike(type);
+  }
+  @Transactional
+  @Override
+  public void removeFilesKeyword(Integer id) {
+    repository.delete(id);
   }
 }

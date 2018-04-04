@@ -50,36 +50,34 @@
 		<div class="container-fluid">
 			<div class="row">
 				<!--引入侧边栏-->
-				<div th:replace="commons/bar::#sidebar(activeUri='users')"></div>
+				<div th:replace="commons/bar::#sidebar(activeUri='keywords')"></div>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<h2><a class="btn btn-sm btn-success" href="user" th:href="@{/user}">人员添加</a></h2>
+					<h2><a class="btn btn-sm btn-success" href="keyword" th:href="@{/keyword}">关键字添加</a></h2>
 					<div class="table-responsive">
 						<table class="table table-striped table-sm">
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>姓名</th>
-									<th>性别</th>
-									<th>部门</th>
-									<th>民族</th>
-									<th>手机号码</th>
-									<th>邮箱</th>>
+									<th>案卷分类</th>
+									<th>关键字</th>
+									<th>关键字权重</th>
+									<th>创建时间</th>
+									<th>更新时间</th>
 									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="user:${users}">
-									<td th:text="${user.id}"></td>
-									<td ><a  class="rb-title" th:href="@{/userdetail/}+${user.id}" th:text="${user.name}"></a></td>
-									<td th:text="${user.sex}==0?'女':'男'"></td>
-									<td th:text="${user.department}"></td>
-									<td th:text="${user.nation}"></td>
-									<td>[[${user.phone}]]</td>
-									<td th:text="${user.email}"></td>
+								<tr th:each="keyword:${filesKeywords}">
+									<td th:text="${keyword.id}"></td>
+									<td th:text="${keyword.type}"></td>
+									<td th:text="${keyword.keyword}"></td>
+									<td th:text="${keyword.weight}"></td>
+									<td>[[${keyword.createTime}]]</td>
+									<td th:text="${keyword.updateTime}"></td>
 									<td>
-										<a class="btn btn-sm btn-primary" th:href="@{/user/}+${user.id}">编辑</a>
-										<button th:attr="del_uri=@{/user/}+${user.id}" class="btn btn-sm btn-danger deleteBtn">删除</button>
+										<a class="btn btn-sm btn-primary" th:href="@{/keyword/}+${keyword.id}">编辑</a>
+										<button th:attr="del_uri=@{/keyword/}+${keyword.id}" class="btn btn-sm btn-danger deleteBtn">删除</button>
 									</td>
 								</tr>
 							</tbody>
@@ -106,7 +104,7 @@
 		</script>
 		<script>
 			$(".deleteBtn").click(function(){
-			    //删除当前员工的
+			    //删除当前关键字的
 			    $("#deleteEmpForm").attr("action",$(this).attr("del_uri")).submit();
 			    return false;
             });

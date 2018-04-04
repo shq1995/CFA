@@ -25,12 +25,41 @@ public class FilesController {
     public String  list(Model model){
         List<Files> files = filesService.listFiles();
         model.addAttribute("files",files);
-        return "user/list";
+        return "file/list";
     }
     //来到案件添加页面
     @GetMapping("/file")
     public String toAddPage(Model model){
         return "file/add";
+    }
+
+    //来到刑事案件页面
+    @GetMapping("/penal")
+    public String toPagePenal(Model model){
+        List<Files> files = filesService.findByType("刑事案卷");
+        model.addAttribute("files",files);
+        return "file/penalList";
+    }
+    //来到刑事案件页面
+    @GetMapping("/civil")
+    public String toPageCivil(Model model){
+        List<Files> files = filesService.findByType("民事案卷");
+        model.addAttribute("files",files);
+        return "file/civilList";
+    }
+    //来到刑事案件页面
+    @GetMapping("/security")
+    public String toPageSecurity(Model model){
+        List<Files> files = filesService.findByType("治安案卷");
+        model.addAttribute("files",files);
+        return "file/securityList";
+    }
+    //来到刑事案件页面
+    @GetMapping("/administration")
+    public String toPageAdministration(Model model){
+        List<Files> files = filesService.findByType("行政案卷");
+        model.addAttribute("files",files);
+        return "file/administrationList";
     }
 
     //案件添加
@@ -60,7 +89,7 @@ public class FilesController {
         return "file/detail";
     }
 
-    //员工修改；需要提交员工id；
+    //案卷修改；
     @PutMapping("/file")
     public String updateFile(Files file,BindingResult bindingResult){
         System.out.println("修改的案件数据："+file);
@@ -68,7 +97,7 @@ public class FilesController {
         return "redirect:/files";
     }
 
-    //员工删除
+    //案卷删除
     @DeleteMapping("/file/{id}")
     public String deleteFile(@PathVariable("id") Integer id){
         filesService.removeFile(id);
