@@ -35,11 +35,6 @@ public class MainController {
 		return "redirect:/login";
 	}
 
-	@GetMapping("/index")
-	public String index() {
-		return "index";
-	}
-
 	/**
 	 * 获取登录界面
 	 * @return
@@ -75,11 +70,6 @@ public class MainController {
 		model.addAttribute("loginError", true);
 		model.addAttribute("errorMsg", "登陆失败，账号或者密码错误！");
 		return "login";
-	}
-	
-	@GetMapping("/register")
-	public String register() {
-		return "register";
 	}
 
 	@Bean

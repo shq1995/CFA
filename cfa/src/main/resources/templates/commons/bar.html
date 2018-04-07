@@ -7,7 +7,7 @@
 <body>
 <!--topbar-->
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0" th:fragment="topbar">
-    <a class="text-primary navbar-brand col-sm-3 col-md-2 mr-0" th:href="@{/main}">[[${session.loginUser}]]</a>
+    <a style="text-align: center"  class="text-primary navbar-brand col-sm-3 col-md-2 mr-0" th:href="@{/main}">[[${session.loginUser}]]</a>
     <div class="form-control form-control-dark w-100" style="text-align: center" >案卷分析及管理平台</div>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
@@ -22,8 +22,8 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link active"
-                   th:class="${activeUri=='main.html'?'nav-link active':'nav-link'}"
-                   href="#" th:href="@{/main.html}">
+                   th:class="${activeUri=='main'?'nav-link active':'nav-link'}"
+                   href="#" th:href="@{/main}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                         <polyline points="9 22 9 12 15 12 15 22"></polyline>
@@ -77,7 +77,7 @@
                 案卷管理
                 <svg style="float: right;margin-top: 3px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
             </a>
-            <div class="collapse" id="collapseExample">
+            <div th:class="${activeUri=='penal'||activeUri=='security'||activeUri=='administration'||activeUri=='civil'?'collapse show':'collapse'}" class="collapse" id="collapseExample">
                 <div class="well" style="padding-left: 30px;">
                     <li class="nav-item">
                         <a class="nav-link active" href="#" th:href="@{/penal}"

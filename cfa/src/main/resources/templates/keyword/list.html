@@ -73,8 +73,8 @@
 									<td th:text="${keyword.type}"></td>
 									<td th:text="${keyword.keyword}"></td>
 									<td th:text="${keyword.weight}"></td>
-									<td>[[${keyword.createTime}]]</td>
-									<td th:text="${keyword.updateTime}"></td>
+									<td th:text="${#dates.format(keyword.createTime, 'yyyy-MM-dd HH:mm')}"></td>
+									<td th:text="${#dates.format(keyword.updateTime, 'yyyy-MM-dd HH:mm')}"></td>
 									<td>
 										<a class="btn btn-sm btn-primary" th:href="@{/keyword/}+${keyword.id}">编辑</a>
 										<button th:attr="del_uri=@{/keyword/}+${keyword.id}" class="btn btn-sm btn-danger deleteBtn">删除</button>

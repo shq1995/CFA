@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>Dashboard Template for Bootstrap</title>
+		<!-- Bootstrap core CSS -->
+		<link href="asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link href="asserts/css/dashboard.css" th:href="@{/asserts/css/dashboard.css}" rel="stylesheet">
+		<style type="text/css">
+			/* Chart.js */
+			
+			@-webkit-keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+			
+			@keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+			
+			.chartjs-render-monitor {
+				-webkit-animation: chartjs-render-animation 0.001s;
+				animation: chartjs-render-animation 0.001s;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--引入抽取的topbar-->
+		<!--模板名：会使用thymeleaf的前后缀配置规则进行解析-->
+		<div th:replace="commons/bar::topbar"></div>
+
+		<div class="container-fluid">
+			<div class="row">
+				<!--引入侧边栏-->
+				<div th:replace="commons/bar::#sidebar(activeUri='civil')"></div>
+
+				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+					<div class="container">
+						<h1 class="text-primary">详情</h1>
+						<table class="table table-bordered">
+							<tr>
+								<td style="background-color:lavender;">ID</td>
+								<td th:text="${file.id}"></td>
+								<td style="background-color:lavender;">标题</td>
+								<td th:text="${file.title}"></td>
+							</tr>
+							<tr>
+								<td style="background-color:lavender;">关键字</td>
+								<td th:text="${file.keyword}"></td>
+								<td style="background-color:lavender;">案号</td>
+								<td th:text="${file.number}"></td>
+							</tr>
+							<tr>
+								<td style="background-color:lavender;">收诉状日期</td>
+								<td th:text="${#dates.format(file.putDate, 'yyyy-MM-dd HH:mm')}"></td>
+								<td style="background-color:lavender;">负责人</td>
+								<td th:text="${file.principal}"></td>
+							</tr>
+							<tr>
+								<td style="background-color:lavender;">原告</td>
+								<td th:text="${file.accuser}"></td>
+								<td style="background-color:lavender;">被告</td>
+								<td th:text="${file.defendant}"></td>
+							</tr>
+							<tr>
+								<td style="background-color:lavender;">承办人</td>
+								<td th:text="${file.agent}"></td>
+								<td style="background-color:lavender;">承办部门</td>
+								<td th:text="${file.agentDepartment}"></td>
+							</tr>
+							<tr>
+								<td style="background-color:lavender;">承办时间</td>
+								<td th:text="${#dates.format(file.agentDate, 'yyyy-MM-dd HH:mm')}"></td>
+								<td style="background-color:lavender;">案件来源</td>
+								<td th:text="${file.source}"></td>
+							</tr>
+							<tr>
+								<td style="background-color:lavender;">诉讼请求</td>
+								<td th:text="${file.request}"></td>
+								<td style="background-color:lavender;">起诉次数</td>
+								<td th:text="${file.frequency}"></td>
+							</tr>
+							<tr>
+								<td style="background-color:lavender;">立案案由</td>
+								<td th:text="${file.startCause}"></td>
+								<td style="background-color:lavender;">立案案由描述</td>
+								<td th:text="${file.startDesc}"></td>
+							</tr>
+							<tr>
+								<td style="background-color:lavender;">结案案由</td>
+								<td th:text="${file.endCase}"></td>
+								<td style="background-color:lavender;">结案案由描述</td>
+								<td th:text="${file.endDesc}"></td>
+							</tr>
+							<tr>
+								<td style="background-color:lavender;">结案时间</td>
+								<td th:text="${#dates.format(file.endTime, 'yyyy-MM-dd HH:mm')}"></td>
+								<td style="background-color:lavender;">受理费</td>
+								<td th:text="${file.pay}"></td>
+							</tr>
+							<tr>
+								<td style="background-color:lavender;">案件特征</td>
+								<td th:text="${file.summary}"></td>
+								<td style="background-color:lavender;">案件描述</td>
+								<td th:text="${file.content}"></td>
+							</tr>
+							<tr>
+								<td style="background-color:lavender;">创建时间</td>
+								<td th:text="${#dates.format(file.createTime, 'yyyy-MM-dd HH:mm')}"></td>
+								<td style="background-color:lavender;">更新时间</td>
+								<td th:text="${#dates.format(file.updateTime, 'yyyy-MM-dd HH:mm')}"></td>
+							</tr>
+						</table>
+					</div>
+				</main>
+			</div>
+		</div>
+
+		<!-- Bootstrap core JavaScript
+    ================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js" th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>
+		<script type="text/javascript" src="asserts/js/popper.min.js" th:src="@{/webjars/popper.js/1.11.1/dist/popper.js}"></script>
+		<script type="text/javascript" src="asserts/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.js}"></script>
+
+		<!-- Icons -->
+		<script type="text/javascript" src="asserts/js/feather.min.js" th:src="@{/asserts/js/feather.min.js}"></script>
+		<script>
+			feather.replace()
+		</script>
+		<script>
+			$(".deleteBtn").click(function(){
+			    //删除当前员工的
+			    $("#deleteEmpForm").attr("action",$(this).attr("del_uri")).submit();
+			    return false;
+            });
+		</script>
+	</body>
+</html>
