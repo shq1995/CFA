@@ -53,12 +53,13 @@ public class MainController {
 		return "main";
 	}
 
-	@PostMapping("/auth")
+	@PostMapping("/login")
 	public String auth(Model model, HttpSession session, @RequestParam String username, @RequestParam String password) {
 		User user = userService.getUserByName(username);
 		if (user != null) {
 			if (user.getPassword().equals(password)) {
 				session.setAttribute("loginUser",user.getName());
+				session.setAttribute("loginUserId",user.getId());
 				return "redirect:/main";
 			}
 		}
