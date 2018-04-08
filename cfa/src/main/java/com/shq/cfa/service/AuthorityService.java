@@ -22,4 +22,6 @@ public interface AuthorityService {
 	Authority getAuthorityById(Integer id);
 
 	List<Authority> listAuthoritys();
+	Authority saveAuth(Authority auth);
+	void removeAuth(Integer id);
 }

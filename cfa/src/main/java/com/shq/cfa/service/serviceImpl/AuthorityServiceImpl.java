@@ -29,4 +29,14 @@ public class AuthorityServiceImpl  implements AuthorityService {
 		return authorityRepository.findAll();
 	}
 
+	@Override
+	public Authority saveAuth(Authority auth) {
+		return authorityRepository.save(auth);
+	}
+
+	@Override
+	public void removeAuth(Integer id) {
+		authorityRepository.delete(id);
+	}
+
 }

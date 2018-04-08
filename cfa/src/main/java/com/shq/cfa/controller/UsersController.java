@@ -36,6 +36,45 @@ public class UsersController {
         return "user/list";
     }
 
+    @GetMapping("/auths")
+    public String  authList(Model model){
+        List<Authority> authorities = authorityService.listAuthoritys();
+        model.addAttribute("authorities",authorities);
+        return "authority/list";
+    }
+
+    @GetMapping("/authadd")
+    public String toAddauthPage(Model model){
+        return "authority/add";
+    }
+
+    @PostMapping("/auth")
+    public String addAuth(Authority auth,BindingResult bindingResult){
+        System.out.println("保存的角色信息："+auth);
+        authorityService.saveAuth(auth);
+        return "redirect:/auths";
+    }
+
+    @GetMapping("/auth/{id}")
+    public String toEditAuthPage(@PathVariable("id") Integer id,Model model){
+        Authority auth = authorityService.getAuthorityById(id);
+        model.addAttribute("auth",auth);
+        return "authority/add";
+    }
+
+    @PutMapping("/auth")
+    public String updateAuth(Authority auth,BindingResult bindingResult){
+        System.out.println("修改的角色数据："+auth);
+        authorityService.saveAuth(auth);
+        return "redirect:/auths";
+    }
+
+    @DeleteMapping("/auth/{id}")
+    public String deleteAuth(@PathVariable("id") Integer id){
+        authorityService.removeAuth(id);
+        return "redirect:/auths";
+    }
+
     //来到员工添加页面
     @GetMapping("/user")
     public String toAddPage(Model model){
