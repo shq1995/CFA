@@ -2,6 +2,7 @@ package com.shq.cfa.controller;
 
 import com.shq.cfa.entity.Authority;
 import com.shq.cfa.entity.User;
+import com.shq.cfa.entity.UserQuery;
 import com.shq.cfa.service.AuthorityService;
 import com.shq.cfa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,29 @@ public class UsersController {
 
     //查询所有人员返回列表页面
     @GetMapping("/users")
-    public String  list(Model model){
-        List<User> users = userService.listUsers();
-
+    public String  list(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
+                        @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
+                        Model model){
+       // Pageable pageable = new PageRequest(pageIndex, pageSize);
+        Page<User> users = userService.findUserNoCriteria(pageIndex,pageSize);
         //放在请求域中
-        model.addAttribute("users",users);
+       // model.addAttribute("datas",pageable);
+        model.addAttribute("datas",users);
+        // thymeleaf默认就会拼串
+        // classpath:/templates/xxxx.html
+        return "user/list";
+    }
+
+    @GetMapping("/findUserQuery")
+    public String  listUserQuery(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
+                        @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
+                        UserQuery userQuery,
+                        Model model){
+        // Pageable pageable = new PageRequest(pageIndex, pageSize);
+        Page<User> users = userService.findUserCriteria(pageIndex,pageSize,userQuery);
+        //放在请求域中
+        // model.addAttribute("datas",pageable);
+        model.addAttribute("datas",users);
         // thymeleaf默认就会拼串
         // classpath:/templates/xxxx.html
         return "user/list";

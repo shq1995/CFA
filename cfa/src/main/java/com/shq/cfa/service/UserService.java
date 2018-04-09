@@ -3,6 +3,7 @@ package com.shq.cfa.service;
 import java.util.List;
 
 import com.shq.cfa.entity.User;
+import com.shq.cfa.entity.UserQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -56,12 +57,6 @@ public interface UserService {
    */
   List<User> listUsers();
 
-  /**
-   * 根据用户名进行分页模糊查询
-   * @param name,pageable
-   * @return
-   */
-  Page<User> listUsersByNameLike(String name, Pageable pageable);
 
   /**
    * 根据id获取用户
@@ -69,6 +64,7 @@ public interface UserService {
    * @return
    */
   User getUserByName(String username);
-
+  Page<User> findUserNoCriteria(Integer page,Integer size);
+  Page<User> findUserCriteria(Integer page,Integer size,UserQuery userQuery);
 }
 

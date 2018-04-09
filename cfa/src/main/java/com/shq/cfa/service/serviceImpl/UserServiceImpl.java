@@ -1,15 +1,24 @@
 package com.shq.cfa.service.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import com.shq.cfa.entity.User;
+import com.shq.cfa.entity.UserQuery;
 import com.shq.cfa.repository.UserRepository;
 import com.shq.cfa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 /**
@@ -57,16 +66,32 @@ public class UserServiceImpl implements UserService{
     return userRepository.findAll();
   }
 
-  @Override
-  public Page<User> listUsersByNameLike(String name, Pageable pageable) {
-    // 模糊查询
-    name = "%" + name + "%";
-    Page<User> users = userRepository.findByNameLike(name, pageable);
-    return users;
-  }
 
   @Override
   public User getUserByName(String username) {
     return userRepository.findByUsername(username);
+  }
+
+  @Override
+  public Page<User> findUserNoCriteria(Integer page, Integer size) {
+    Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "id");
+    return userRepository.findAll(pageable);
+  }
+
+  @Override
+  public Page<User> findUserCriteria(Integer page, Integer size,final UserQuery userQuery) {
+    Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "id");
+    Page<User> userPage = userRepository.findAll(new Specification<User>(){
+      @Override
+      public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+        List<Predicate> list = new ArrayList<Predicate>();
+        if(null!=userQuery.getName()&&!"".equals(userQuery.getName())){
+          list.add(criteriaBuilder.equal(root.get("name").as(String.class), userQuery.getName()));
+        }
+        Predicate[] p = new Predicate[list.size()];
+        return criteriaBuilder.and(list.toArray(p));
+      }
+    },pageable);
+    return userPage;
   }
 }
