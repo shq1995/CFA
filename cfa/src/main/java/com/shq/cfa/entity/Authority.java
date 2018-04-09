@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -32,8 +33,9 @@ public class Authority {
 	@org.hibernate.annotations.CreationTimestamp  // 由数据库自动创建时间
 	private Date createTime;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@org.hibernate.annotations.CreationTimestamp  // 由数据库自动创建时间
+	//@Temporal(TemporalType.TIMESTAMP)
+	//@org.hibernate.annotations.CreationTimestamp
+	@UpdateTimestamp// 由数据库自动创建时间
 	private Date updateTime;
 
 	public Authority() {

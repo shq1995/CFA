@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -82,8 +83,9 @@ public class User implements Serializable {
   @org.hibernate.annotations.CreationTimestamp  // 由数据库自动创建时间
   private Date createTime;
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @org.hibernate.annotations.CreationTimestamp  // 由数据库自动创建时间
+  //@Temporal(TemporalType.TIMESTAMP)
+  //@org.hibernate.annotations.CreationTimestamp  // 由数据库自动创建时间
+  @UpdateTimestamp
   private Date updateTime;
 
   protected User() { // JPA 的规范要求无参构造函数；设为 protected 防止直接使用

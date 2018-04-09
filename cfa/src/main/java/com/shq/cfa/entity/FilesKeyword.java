@@ -2,6 +2,7 @@ package com.shq.cfa.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -45,8 +46,9 @@ public class FilesKeyword {
   @org.hibernate.annotations.CreationTimestamp  // 由数据库自动创建时间
   private Date createTime;
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @org.hibernate.annotations.UpdateTimestamp // 由数据库自动创建时间
+  //@Temporal(TemporalType.TIMESTAMP)
+  //@org.hibernate.annotations.UpdateTimestamp
+  @UpdateTimestamp //由数据库自动创建时间
   private Date updateTime;
 
   public FilesKeyword() {

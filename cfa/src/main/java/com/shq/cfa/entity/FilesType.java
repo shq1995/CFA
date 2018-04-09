@@ -2,6 +2,7 @@ package com.shq.cfa.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -47,8 +48,9 @@ public class FilesType {
   @org.hibernate.annotations.CreationTimestamp  // 由数据库自动创建时间
   private Date createTime;
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @org.hibernate.annotations.CreationTimestamp  // 由数据库自动创建时间
+  //@Temporal(TemporalType.TIMESTAMP)
+  //@org.hibernate.annotations.CreationTimestamp  // 由数据库自动创建时间
+  @UpdateTimestamp
   private Date updateTime;
 
   public FilesType() {
