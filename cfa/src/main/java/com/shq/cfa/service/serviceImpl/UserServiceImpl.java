@@ -79,15 +79,13 @@ public class UserServiceImpl implements UserService{
   }
 
   @Override
-  public Page<User> findUserCriteria(Integer page, Integer size,final UserQuery userQuery) {
+  public Page<User> findUserByNameLike(Integer page, Integer size,String name) {
     Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "id");
     Page<User> userPage = userRepository.findAll(new Specification<User>(){
       @Override
       public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         List<Predicate> list = new ArrayList<Predicate>();
-        if(null!=userQuery.getName()&&!"".equals(userQuery.getName())){
-          list.add(criteriaBuilder.equal(root.get("name").as(String.class), userQuery.getName()));
-        }
+        list.add(criteriaBuilder.like(root.get("name").as(String.class), "%"+name+"%"));
         Predicate[] p = new Predicate[list.size()];
         return criteriaBuilder.and(list.toArray(p));
       }

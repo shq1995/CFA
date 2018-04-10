@@ -43,12 +43,10 @@ public class UsersController {
     @GetMapping("/findUserQuery")
     public String  listUserQuery(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
                         @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
-                        UserQuery userQuery,
+                                 @RequestParam(value="name",required=false,defaultValue="") String name,
                         Model model){
-        // Pageable pageable = new PageRequest(pageIndex, pageSize);
-        Page<User> users = userService.findUserCriteria(pageIndex,pageSize,userQuery);
+        Page<User> users = userService.findUserByNameLike(pageIndex,pageSize,name);
         //放在请求域中
-        // model.addAttribute("datas",pageable);
         model.addAttribute("datas",users);
         // thymeleaf默认就会拼串
         // classpath:/templates/xxxx.html

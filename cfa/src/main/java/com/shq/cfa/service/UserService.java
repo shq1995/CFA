@@ -65,6 +65,6 @@ public interface UserService {
    */
   User getUserByName(String username);
   Page<User> findUserNoCriteria(Integer page,Integer size);
-  Page<User> findUserCriteria(Integer page,Integer size,UserQuery userQuery);
+  Page<User> findUserByNameLike(Integer page,Integer size,String name);
 }
 
