@@ -3,10 +3,7 @@ package com.shq.cfa.service;
 import java.util.List;
 
 import com.shq.cfa.entity.User;
-import com.shq.cfa.entity.UserQuery;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
 
 
 /**
@@ -65,6 +62,7 @@ public interface UserService {
    */
   User getUserByName(String username);
   Page<User> findUserNoCriteria(Integer page,Integer size);
+
   Page<User> findUserByNameLike(Integer page,Integer size,String name);
 }
 

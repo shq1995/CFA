@@ -4,12 +4,12 @@ import com.shq.cfa.entity.FilesKeyword;
 import com.shq.cfa.service.AuthorityService;
 import com.shq.cfa.service.FilesKeywordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @Controller
 public class KeywordController {
@@ -20,11 +20,35 @@ public class KeywordController {
     private AuthorityService authorityService;
 
     //查询关键字返回列表页面
-    @GetMapping("/keywords")
+/*    @GetMapping("/keywords")
     public String  list(Model model){
         List<FilesKeyword> filesKeywords = filesKeywordService.findAll();
         //放在请求域中
         model.addAttribute("filesKeywords",filesKeywords);
+        return "keyword/list";
+    }*/
+    @GetMapping("/keywords")
+    public String  list(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
+                        @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
+                        Model model){
+        // Pageable pageable = new PageRequest(pageIndex, pageSize);
+        Page<FilesKeyword> keywords = filesKeywordService.findKeywordNoCriteria(pageIndex,pageSize);
+        //放在请求域中
+        // model.addAttribute("datas",pageable);
+        model.addAttribute("datas",keywords);
+        // thymeleaf默认就会拼串
+        // classpath:/templates/xxxx.html
+        return "keyword/list";
+    }
+    @GetMapping("/findKeywordQuery")
+    public String  listKeywordQuery(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
+                                 @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
+                                    @RequestParam(value="name",required=false,defaultValue="") String type,
+                                    @RequestParam(value="name",required=false,defaultValue="") String keyword,
+                                 Model model){
+        Page<FilesKeyword> keywords = filesKeywordService.findKeywordCriteria(pageIndex,pageSize,type,keyword);
+        //放在请求域中
+        model.addAttribute("datas",keywords);
         return "keyword/list";
     }
 

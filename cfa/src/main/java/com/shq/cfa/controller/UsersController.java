@@ -2,19 +2,15 @@ package com.shq.cfa.controller;
 
 import com.shq.cfa.entity.Authority;
 import com.shq.cfa.entity.User;
-import com.shq.cfa.entity.UserQuery;
 import com.shq.cfa.service.AuthorityService;
 import com.shq.cfa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.List;
 
 @Controller

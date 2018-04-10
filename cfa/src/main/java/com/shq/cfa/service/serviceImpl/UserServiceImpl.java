@@ -10,7 +10,6 @@ import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import com.shq.cfa.entity.User;
-import com.shq.cfa.entity.UserQuery;
 import com.shq.cfa.repository.UserRepository;
 import com.shq.cfa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import com.shq.cfa.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * @create 2018-03-27 10:32
  * @desc 案卷 仓库
  **/
-public interface FilesRepository extends JpaRepository<Files, Integer>{
+public interface FilesRepository extends JpaRepository<Files, Integer>,JpaSpecificationExecutor<Files> {
  //按照类型查询
  List<Files> findByType(String type);
  //按照标题模糊查询

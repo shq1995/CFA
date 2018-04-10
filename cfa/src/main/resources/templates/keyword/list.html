@@ -54,13 +54,29 @@
 				<div th:replace="commons/bar::#sidebar(activeUri='keywords')"></div>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<h2><a class="btn btn-sm btn-success" href="keyword" th:href="@{/keyword}">关键字添加</a></h2>
-					<div class="table-responsive">
+					<div class="row">
+						<div class="col-md-3">
+							<a class="btn btn-sm btn-success" href="keyword" th:href="@{/keyword}">关键字添加</a>
+						</div>
+						<div class="col-md-3">
+							<form th:action="@{/findKeywordQuery}"  th:method="get">
+								<div class="form-group">
+									<div style="display: flex">
+										<input type="text" style="width: 150px;height: 32px;" class="form-control" name="type" placeholder="请输入案卷类型" />&nbsp;&nbsp;
+										<input type="text" style="width: 170px;height: 32px;" class="form-control" name="keyword" placeholder="请输入关键字名称" />
+										<button class="btn btn-default" type="submit" placeholder="查询" style="height: 33px;">查询</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+					<div class="table-responsive" style="height: 530px">
 						<table class="table table-striped table-sm">
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>案卷分类</th>
+									<th>案卷类型</th>
 									<th>关键字</th>
 									<th>关键字权重</th>
 									<th>创建时间</th>
@@ -69,7 +85,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="keyword:${filesKeywords}">
+								<tr th:each="keyword:${datas}">
 									<td th:text="${keyword.id}"></td>
 									<td th:text="${keyword.type}"></td>
 									<td th:text="${keyword.keyword}"></td>
@@ -84,6 +100,7 @@
 							</tbody>
 						</table>
 					</div>
+					<div th:include="commons/bar::pager" style="	float: right"></div>
 				</main>
 				<form id="deleteEmpForm"  method="post">
 					<input type="hidden" name="_method" value="delete"/>
