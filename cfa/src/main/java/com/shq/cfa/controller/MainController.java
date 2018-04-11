@@ -1,6 +1,7 @@
 package com.shq.cfa.controller;
 
 import com.shq.cfa.component.MyLocaleResolver;
+import com.shq.cfa.entity.Authority;
 import com.shq.cfa.entity.User;
 import com.shq.cfa.service.AuthorityService;
 import com.shq.cfa.service.UserService;
@@ -56,10 +57,14 @@ public class MainController {
 	@PostMapping("/login")
 	public String auth(Model model, HttpSession session, @RequestParam String username, @RequestParam String password) {
 		User user = userService.getUserByName(username);
+		//System.out.println(user.getAuth());
+		Authority authority = authorityService.getAuthorityById(user.getAuth());
+		//System.out.println(authority.getName());
 		if (user != null) {
 			if (user.getPassword().equals(password)) {
 				session.setAttribute("loginUser",user.getName());
 				session.setAttribute("loginUserId",user.getId());
+				session.setAttribute("authName",authority.getName());
 				return "redirect:/main";
 			}
 		}

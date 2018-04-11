@@ -7,7 +7,7 @@
 <body>
 <!--topbar-->
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0" th:fragment="topbar">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" th:href="@{/userdetail/}+${session.loginUserId}">欢迎使用：[[${session.loginUser}]]</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" th:href="@{/userdetail/}+${session.loginUserId}" th:text="${session.authName=='ADMIN'}?'欢迎管理员:'+${session.loginUser}:'欢迎用户:'+${session.loginUser}"></a>
     <div class="form-control form-control-dark w-100" style="text-align: center" >案卷分析及管理平台</div>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
@@ -33,7 +33,7 @@
             </li>
             <li class="nav-item" >
                 <a class="nav-link active" href="#" th:href="@{/users}"
-                   th:class="${activeUri=='users'?'nav-link active':'nav-link'}">
+                   th:class="${activeUri=='users'?'nav-link active':'nav-link'}" th:style="'display:' + @{(${session.authName}=='ADMIN' ? 'inline-block' : 'none')}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                         <circle cx="9" cy="7" r="4"></circle>
@@ -58,7 +58,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="#" th:href="@{/keywords}"
-                   th:class="${activeUri=='keywords'?'nav-link active':'nav-link'}">
+                   th:class="${activeUri=='keywords'?'nav-link active':'nav-link'}" th:style="'display:' + @{(${session.authName}=='ADMIN' ? 'inline-block' : 'none')}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                         <polyline points="14 2 14 8 20 8"></polyline>
