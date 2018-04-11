@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
@@ -62,7 +63,7 @@ public class User implements Serializable {
   @Column(nullable = false, length = 50, unique = true)
   private String email;
 
-  @NotEmpty(message = "账号不能为空")
+  @NotBlank(message = "账号不能为空")
   @Length(min = 2, max = 20, message="长度不能小于2位大于20位")
   @Column(nullable = false, length = 20, unique = true)
   private String username; // 用户账号，用户登录时的唯一标识
@@ -78,6 +79,10 @@ public class User implements Serializable {
   @Column(nullable = true)
   private String address;
 
+  @NotNull(message = "角色不能为空")
+  @Column(nullable = false)
+  private Integer auth;
+
   @Temporal(TemporalType.TIMESTAMP)
   @Column(updatable = false)
   @org.hibernate.annotations.CreationTimestamp  // 由数据库自动创建时间
@@ -91,19 +96,21 @@ public class User implements Serializable {
   protected User() { // JPA 的规范要求无参构造函数；设为 protected 防止直接使用
   }
 
-  public User( String department, Integer sex, Date birthday, String phone, String nation, String code, String address, String politics, String name, String email, String username, String password,Timestamp createTime, Timestamp updateTime) {
+  public User(String department, Integer sex, Date birthday, String phone, String nation, String code, String politics, String name, String email, String username, String password, String avatar, String address, Integer auth, Date createTime, Date updateTime) {
     this.department = department;
     this.sex = sex;
     this.birthday = birthday;
     this.phone = phone;
     this.nation = nation;
     this.code = code;
-    this.address = address;
     this.politics = politics;
     this.name = name;
     this.email = email;
     this.username = username;
     this.password = password;
+    this.avatar = avatar;
+    this.address = address;
+    this.auth = auth;
     this.createTime = createTime;
     this.updateTime = updateTime;
   }

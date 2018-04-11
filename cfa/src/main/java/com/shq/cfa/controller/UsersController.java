@@ -42,8 +42,10 @@ public class UsersController {
                                  @RequestParam(value="name",required=false,defaultValue="") String name,
                         Model model){
         Page<User> users = userService.findUserByNameLike(pageIndex,pageSize,name);
+        List<Authority> authority = authorityService.listAuthoritys();
         //放在请求域中
         model.addAttribute("datas",users);
+        model.addAttribute("auth",authority);
         // thymeleaf默认就会拼串
         // classpath:/templates/xxxx.html
         return "user/list";
@@ -91,7 +93,8 @@ public class UsersController {
     //来到员工添加页面
     @GetMapping("/user")
     public String toAddPage(Model model){
-
+        List<Authority> authority = authorityService.listAuthoritys();
+        model.addAttribute("auth",authority);
         return "user/add";
     }
 
@@ -113,6 +116,8 @@ public class UsersController {
     @GetMapping("/user/{id}")
     public String toEditPage(@PathVariable("id") Integer id,Model model){
         User user = userService.getUserById(id);
+        List<Authority> authority = authorityService.listAuthoritys();
+        model.addAttribute("auth",authority);
         model.addAttribute("user",user);
 
         //页面要显示所有的部门列表
@@ -124,7 +129,9 @@ public class UsersController {
     @GetMapping("/userdetail/{id}")
     public String userDetail(@PathVariable("id") Integer id,Model model){
         User user = userService.getUserById(id);
+        Authority authority = authorityService.getAuthorityById(user.getAuth());
         model.addAttribute("user",user);
+        model.addAttribute("auth",authority);
         return "user/detail";
     }
 

@@ -9,7 +9,7 @@
 		<meta name="author" content="">
 
 		<title>用户详情</title>
-		<link rel="icon" type="image/x-icon" th:href="@{/asserts/img/ooopic.ico}">
+		<link rel="icon" type="image/x-icon" th:href="@{/asserts/img/document.png}">
 		<!-- Bootstrap core CSS -->
 		<link href="asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
 
@@ -90,6 +90,14 @@
 							<tr>
 								<td style="background-color:lavender;">邮箱</td>
 								<td th:text="${user.email}"></td>
+								<td style="background-color:lavender;">角色</td>
+								<td th:text="${auth.name}"></td>
+							</tr>
+							<tr>
+								<td style="background-color:lavender;">创建时间</td>
+								<td th:text="${#dates.format(user.createTime, 'yyyy-MM-dd HH:mm')}"></td>
+								<td style="background-color:lavender;">更新时间</td>
+								<td th:text="${#dates.format(user.updateTime, 'yyyy-MM-dd HH:mm')}"></td>
 							</tr>
 						</table>
 					</div>
