@@ -14,6 +14,6 @@ import java.util.List;
  **/
 public interface FilesKeywordRepository extends JpaRepository<FilesKeyword, Integer>,JpaSpecificationExecutor<FilesKeyword> {
   FilesKeyword findByKeywordLike(String keyWord);
-  List<FilesKeyword> findByTypeLike(String type);
+  List<FilesKeyword> findByType(String type);
 }
 

@@ -1,14 +1,17 @@
 package com.shq.cfa.controller;
 
 import com.shq.cfa.entity.FilesKeyword;
-import com.shq.cfa.service.AuthorityService;
+import com.shq.cfa.entity.FilesType;
 import com.shq.cfa.service.FilesKeywordService;
+import com.shq.cfa.service.FilesTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Controller
@@ -17,34 +20,24 @@ public class KeywordController {
     private FilesKeywordService filesKeywordService;
 
     @Autowired
-    private AuthorityService authorityService;
+    private FilesTypeService filesTypeService;
 
-    //查询关键字返回列表页面
-/*    @GetMapping("/keywords")
-    public String  list(Model model){
-        List<FilesKeyword> filesKeywords = filesKeywordService.findAll();
-        //放在请求域中
-        model.addAttribute("filesKeywords",filesKeywords);
-        return "keyword/list";
-    }*/
     @GetMapping("/keywords")
     public String  list(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
                         @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
                         Model model){
-        // Pageable pageable = new PageRequest(pageIndex, pageSize);
         Page<FilesKeyword> keywords = filesKeywordService.findKeywordNoCriteria(pageIndex,pageSize);
         //放在请求域中
-        // model.addAttribute("datas",pageable);
+        List<FilesType> filesTypes = filesTypeService.findAll();
         model.addAttribute("datas",keywords);
-        // thymeleaf默认就会拼串
-        // classpath:/templates/xxxx.html
+        model.addAttribute("types",filesTypes);
         return "keyword/list";
     }
     @GetMapping("/findKeywordQuery")
     public String  listKeywordQuery(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
                                  @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
-                                    @RequestParam(value="name",required=false,defaultValue="") String type,
-                                    @RequestParam(value="name",required=false,defaultValue="") String keyword,
+                                    @RequestParam(value="type",required=false,defaultValue="") String type,
+                                    @RequestParam(value="keyword",required=false,defaultValue="") String keyword,
                                  Model model){
         Page<FilesKeyword> keywords = filesKeywordService.findKeywordCriteria(pageIndex,pageSize,type,keyword);
         //放在请求域中
@@ -54,7 +47,8 @@ public class KeywordController {
 
     @GetMapping("/keyword")
     public String toAddPage(Model model){
-
+        List<FilesType> filesTypes = filesTypeService.findAll();
+        model.addAttribute("types",filesTypes);
         return "keyword/add";
     }
 
@@ -70,8 +64,10 @@ public class KeywordController {
     @GetMapping("/keyword/{id}")
     public String toEditPage(@PathVariable("id") Integer id,Model model){
         FilesKeyword filesKeyword = filesKeywordService.findOne(id);
+        List<FilesType> filesTypes = filesTypeService.findAll();
+        model.addAttribute("types",filesTypes);
         model.addAttribute("filesKeyword",filesKeyword);
-        return "keyword/edit";
+        return "keyword/add";
     }
 
     @PutMapping("/keyword")

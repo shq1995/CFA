@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>关键字编辑</title>
+		<title>案卷分类添加/编辑</title>
 		<link rel="icon" type="image/x-icon" th:href="@{/asserts/img/document.png}">
 		<!-- Bootstrap core CSS -->
 		<link href="asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
@@ -51,38 +51,33 @@
 		<div class="container-fluid">
 			<div class="row">
 				<!--引入侧边栏-->
-				<div th:replace="commons/bar::#sidebar(activeUri='keywords')"></div>
+				<div th:replace="commons/bar::#sidebar(activeUri='filesTypes')"></div>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 					<!--需要区分是员工修改还是添加；-->
-					<form th:action="@{/keyword}" method="post">
-						<!--发送put请求修改关键字数据-->
+					<form th:action="@{/filesType}" method="post">
+						<!--发送put请求修改员工数据-->
 						<!--
 						1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）
 						2、页面创建一个post表单
 						3、创建一个input项，name="_method";值就是我们指定的请求方式
 						-->
-						<input type="hidden" name="_method" value="put" th:if="${filesKeyword!=null}"/>
-						<input type="hidden" name="id" th:if="${filesKeyword!=null}" th:value="${filesKeyword.id}">
+						<input type="hidden" name="_method" value="put" th:if="${type!=null}"/>
+						<input type="hidden" name="id" th:if="${type!=null}" th:value="${type.id}">
 						<div class="form-group">
 							<div class="form-group">
-								<label>案卷分类</label>
-								<select class="form-control" name="type" >
-									<option th:selected="${filesKeyword.type=='刑事案卷'}">刑事案卷</option>
-									<option th:selected="${filesKeyword.type=='民事案卷'}">民事案卷</option>
-									<option th:selected="${filesKeyword.type=='治安案卷'}">治安案卷</option>
-									<option th:selected="${filesKeyword.type=='行政案卷'}">行政案卷</option>
-								</select>
+								<label>分类名称</label>
+								<input name="name" type="text" class="form-control" placeholder="请输入案卷分类名称" th:value="${type!=null}?${type.name}">
 							</div>
 							<div class="form-group">
-								<label>关键字</label>
-								<input name="keyword" type="text" class="form-control" placeholder="请输入关键字" th:value="${filesKeyword.keyword}">
+								<label>简称</label>
+								<input name="abbreviation" type="text" class="form-control" placeholder="请输入简称" th:value="${type!=null}?${type.abbreviation}">
 							</div>
 							<div class="form-group">
-								<label>关键字权重</label>
-								<input name="weight" type="text" class="form-control" placeholder="请输入关键字权重" th:value="${filesKeyword.weight}">
+								<label>说明</label>
+								<textarea name="state" rows="3" class="form-control" placeholder="请输入分类说明" th:text= "${type!=null}?${type.state}"></textarea>
 							</div>
-						<button type="submit" class="btn btn-primary" >修改</button>
+						<button type="submit" class="btn btn-primary" th:text="${type!=null}?'修改':'添加'">添加</button>
 						</div>
 					</form>
 				</main>

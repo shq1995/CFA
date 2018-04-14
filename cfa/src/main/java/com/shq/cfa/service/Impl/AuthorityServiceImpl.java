@@ -1,5 +1,5 @@
 
-package com.shq.cfa.service.serviceImpl;
+package com.shq.cfa.service.Impl;
 import com.shq.cfa.entity.Authority;
 import com.shq.cfa.repository.AuthorityRepository;
 import com.shq.cfa.service.AuthorityService;

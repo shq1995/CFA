@@ -1,6 +1,7 @@
 package com.shq.cfa.service;
 
 import com.shq.cfa.entity.Files;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -48,4 +49,9 @@ public interface FilesService {
 	List<Files> findBySourceLike(String source);
 	//按照原告模糊查询
 	List<Files> findByAccuserLike(String accuser);
+	Page<Files> findFilesNoCriteria(Integer page, Integer size);
+
+	Page<Files> findFileCriteria(Integer page,Integer size,String title,String number);
+	Page<Files> findFilesCriteria(Integer page,Integer size,String title,String number,String type);
+	Page<Files> findFilesTypeCriteria(Integer page,Integer size,String type);
 }

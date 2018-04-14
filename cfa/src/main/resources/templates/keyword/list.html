@@ -86,8 +86,8 @@
 							</thead>
 							<tbody>
 								<tr th:each="keyword:${datas}">
-									<td th:text="${keyword.id}"></td>
-									<td th:text="${keyword.type}"></td>
+									<td th:text="${keyword.id}"> </td>
+									<td th:text="${type.name}" th:if="${type.id == keyword.type}" th:each="type:${types}"></td>
 									<td th:text="${keyword.keyword}"></td>
 									<td th:text="${keyword.weight}"></td>
 									<td th:text="${#dates.format(keyword.createTime, 'yyyy-MM-dd HH:mm')}"></td>

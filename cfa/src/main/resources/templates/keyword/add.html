@@ -12,6 +12,8 @@
 		<link rel="icon" type="image/x-icon" th:href="@{/asserts/img/document.png}">
 		<!-- Bootstrap core CSS -->
 		<link href="asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
+		<!-- toastr CSS -->
+		<link href="asserts/css/toastr.min.css" th:href="@{/asserts/css/toastr.min.css}" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
 		<link href="asserts/css/dashboard.css" th:href="@{/asserts/css/dashboard.css}" rel="stylesheet">
@@ -67,11 +69,8 @@
 						<div class="form-group">
 							<div class="form-group">
 								<label>案卷分类</label>
-								<select class="form-control" name="type" >
-									<option >刑事案卷</option>
-									<option >民事案卷</option>
-									<option >治安案卷</option>
-									<option >行政案卷</option>
+								<select class="form-control" name="type">
+									<option th:selected="${filesKeyword!=null}?${type.id == filesKeyword.type}" th:value="${type.id}" th:each="type:${types}" th:text="${type.name}">1</option>
 								</select>
 							</div>
 							<div class="form-group">
@@ -95,7 +94,7 @@
 		<script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js" th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>
 		<script type="text/javascript" src="asserts/js/popper.min.js" th:src="@{/webjars/popper.js/1.11.1/dist/popper.js}"></script>
 		<script type="text/javascript" src="asserts/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.js}"></script>
-
+		<script src="/asserts/js/toastr.min.js" th:src="@{/asserts/js/toastr.min.js}"></script>
 		<!-- Icons -->
 		<script type="text/javascript" src="asserts/js/feather.min.js" th:src="@{/asserts/js/feather.min.js}"></script>
 		<script>

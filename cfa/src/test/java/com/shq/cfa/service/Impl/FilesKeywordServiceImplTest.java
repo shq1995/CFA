@@ -1,4 +1,4 @@
-package com.shq.cfa.service.serviceImpl;
+package com.shq.cfa.service.Impl;
 
 import com.shq.cfa.entity.FilesKeyword;
 import org.junit.Assert;
@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class FilesKeywordServiceImplTest {
@@ -26,8 +25,8 @@ public class FilesKeywordServiceImplTest {
   public void save() throws Exception {
     FilesKeyword filesKeyword = new FilesKeyword();
     filesKeyword.setKeyword("刑事");
-    filesKeyword.setType("刑事案卷");
-    filesKeyword.setWeight(1);
+    filesKeyword.setType(2);
+    filesKeyword.setWeight(1l);
     FilesKeyword result = filesKeywordService.save(filesKeyword);
     Assert.assertNotNull(result);
   }
@@ -45,7 +44,7 @@ public class FilesKeywordServiceImplTest {
 
   @Test
   public void findByType() throws Exception {
-    List<FilesKeyword> filesKeywordList = filesKeywordService.findByTypeLike("民事");
+    List<FilesKeyword> filesKeywordList = filesKeywordService.findByType("民事");
   }
 
 }

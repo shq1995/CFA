@@ -1,4 +1,4 @@
-package com.shq.cfa.service.serviceImpl;
+package com.shq.cfa.service.Impl;
 
 import com.shq.cfa.entity.FilesKeyword;
 import com.shq.cfa.repository.FilesKeywordRepository;
@@ -50,8 +50,8 @@ public class FilesKeywordServiceImpl implements FilesKeywordService{
   }
 
   @Override
-  public List<FilesKeyword> findByTypeLike(String type) {
-    return repository.findByTypeLike(type);
+  public List<FilesKeyword> findByType(String type) {
+    return repository.findByType(type);
   }
   @Transactional
   @Override

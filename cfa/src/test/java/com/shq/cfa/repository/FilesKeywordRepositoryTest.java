@@ -18,8 +18,8 @@ public class FilesKeywordRepositoryTest {
   public void saveTast(){
     FilesKeyword filesKeyword = new FilesKeyword();
     filesKeyword.setKeyword("民事");
-    filesKeyword.setType("民事案卷");
-    filesKeyword.setWeight(1);
+    filesKeyword.setType(1);
+    filesKeyword.setWeight(1l);
     FilesKeyword result = filesKeywordRepository.save(filesKeyword);
     Assert.assertNotNull(result);
 

@@ -71,7 +71,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="file:${files}">
+								<tr th:each="file:${datas}">
 									<td th:text="${file.id}"></td>
 									<td ><a  class="rb-title" th:href="@{/administrationfiledetail/}+${file.id}" th:text="${file.title}"></a></td>
 									<td th:text="${file.number}"></td>
@@ -88,6 +88,7 @@
 							</tbody>
 						</table>
 					</div>
+					<div th:include="commons/bar::pager" style="	float: right"></div>
 				</main>
 				<form id="deleteEmpForm"  method="post">
 					<input type="hidden" name="_method" value="delete"/>

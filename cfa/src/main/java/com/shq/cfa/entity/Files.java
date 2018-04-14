@@ -103,7 +103,7 @@ public class Files implements Serializable {
 
 	@NotBlank(message = "结案案由不能为空")
 	@Column(nullable = false) // 映射为字段，值不能为空
-	private String endCase;
+	private String endCause;
 
 	@NotBlank(message = "结案案由描述不能为空")
 	@Column(nullable = false) // 映射为字段，值不能为空
@@ -140,7 +140,7 @@ public class Files implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Files(String title, String keyword, String type, String number, Date putDate, String principal, String accuser, String defendant, String agent, String agentDepartment, Date agentDate, String source, String request, Integer frequency, String startCause, String startDesc, Date endTime, String endCase, String endDesc, String pay, String summary, String content, Date createTime, Date updateTime) {
+	public Files(String title, String keyword, String type, String number, Date putDate, String principal, String accuser, String defendant, String agent, String agentDepartment, Date agentDate, String source, String request, Integer frequency, String startCause, String startDesc, Date endTime, String endCause, String endDesc, String pay, String summary, String content, Date createTime, Date updateTime) {
 		this.title = title;
 		this.keyword = keyword;
 		this.type = type;
@@ -158,7 +158,7 @@ public class Files implements Serializable {
 		this.startCause = startCause;
 		this.startDesc = startDesc;
 		this.endTime = endTime;
-		this.endCase = endCase;
+		this.endCause = endCause;
 		this.endDesc = endDesc;
 		this.pay = pay;
 		this.summary = summary;

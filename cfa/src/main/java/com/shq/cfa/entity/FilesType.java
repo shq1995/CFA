@@ -26,18 +26,12 @@ public class FilesType {
   private Integer id; // 案件类型的唯一标识
 
   @NotEmpty(message = "分类名称不能为空")
-  @Size(min=2, max=50)
   @Column(nullable = false, length = 50) // 映射为字段，值不能为空
   private String name;
 
   @NotEmpty(message = "说明不能为空")
-  @Size(min=2, max=50)
   @Column(nullable = false, length = 50) // 映射为字段，值不能为空
   private String state;
-
-  @NotEmpty(message = "序号不能为空")
-  @Column(nullable = false) // 映射为字段，值不能为空
-  private String number;
 
   @NotEmpty(message = "简称不能为空")
   @Column(nullable = false) // 映射为字段，值不能为空
@@ -53,13 +47,12 @@ public class FilesType {
   @UpdateTimestamp
   private Date updateTime;
 
-  public FilesType() {
+  protected FilesType() {
   }
 
-  public FilesType(String name, String state, String number, String abbreviation, Timestamp createTime, Timestamp updateTime) {
+  public FilesType(String name, String state, String abbreviation, Timestamp createTime, Timestamp updateTime) {
     this.name = name;
     this.state = state;
-    this.number = number;
     this.abbreviation = abbreviation;
     this.createTime = createTime;
     this.updateTime = updateTime;
