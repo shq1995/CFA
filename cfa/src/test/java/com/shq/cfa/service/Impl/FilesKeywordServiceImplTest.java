@@ -26,7 +26,7 @@ public class FilesKeywordServiceImplTest {
     FilesKeyword filesKeyword = new FilesKeyword();
     filesKeyword.setKeyword("刑事");
     filesKeyword.setType(2);
-    filesKeyword.setWeight(1l);
+    filesKeyword.setWeight(1f);
     FilesKeyword result = filesKeywordService.save(filesKeyword);
     Assert.assertNotNull(result);
   }
@@ -44,7 +44,7 @@ public class FilesKeywordServiceImplTest {
 
   @Test
   public void findByType() throws Exception {
-    List<FilesKeyword> filesKeywordList = filesKeywordService.findByType("民事");
+    List<FilesKeyword> filesKeywordList = filesKeywordService.findByType(1);
   }
 
 }

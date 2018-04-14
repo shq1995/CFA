@@ -19,7 +19,7 @@ public class FilesKeywordRepositoryTest {
     FilesKeyword filesKeyword = new FilesKeyword();
     filesKeyword.setKeyword("民事");
     filesKeyword.setType(1);
-    filesKeyword.setWeight(1l);
+    filesKeyword.setWeight(1f);
     FilesKeyword result = filesKeywordRepository.save(filesKeyword);
     Assert.assertNotNull(result);
 

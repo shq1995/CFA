@@ -27,8 +27,6 @@ public class FilesKeyword {
   @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
   private Integer id; // 案件关键字的唯一标识
 
-  @NotBlank(message = "案卷分类不能为空")
-  @Size(min=2, max=50)
   @Column(nullable = false) // 映射为字段，值不能为空
   private Integer type;
 
@@ -39,7 +37,7 @@ public class FilesKeyword {
 
   @NotNull(message = "关键字权重不能为空")
   @Column(nullable = false) // 映射为字段，值不能为空
-  private Long weight;
+  private Float weight;
 
   @Temporal(TemporalType.TIMESTAMP)
   @Column(updatable = false)
@@ -55,7 +53,7 @@ public class FilesKeyword {
 
   }
 
-  public FilesKeyword(Integer type, String keyword, Long weight, Timestamp createTime, Timestamp updateTime) {
+  public FilesKeyword(Integer type, String keyword, Float weight, Timestamp createTime, Timestamp updateTime) {
     this.type = type;
     this.keyword = keyword;
     this.weight = weight;

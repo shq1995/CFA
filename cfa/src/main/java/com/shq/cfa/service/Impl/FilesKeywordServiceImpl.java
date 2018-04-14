@@ -40,6 +40,11 @@ public class FilesKeywordServiceImpl implements FilesKeywordService{
   }
 
   @Override
+  public FilesKeyword update(FilesKeyword filesKeyword) {
+    return repository.saveAndFlush(filesKeyword);
+  }
+
+  @Override
   public FilesKeyword findByKeywordLike(String keyword) {
     return repository.findByKeywordLike(keyword);
   }
@@ -50,7 +55,7 @@ public class FilesKeywordServiceImpl implements FilesKeywordService{
   }
 
   @Override
-  public List<FilesKeyword> findByType(String type) {
+  public List<FilesKeyword> findByType(Integer type) {
     return repository.findByType(type);
   }
   @Transactional

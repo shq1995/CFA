@@ -2,11 +2,8 @@ package com.shq.cfa.controller;
 
 import com.shq.cfa.entity.Files;
 import com.shq.cfa.entity.FilesKeyword;
-import com.shq.cfa.entity.User;
-import com.shq.cfa.service.AuthorityService;
-import com.shq.cfa.service.FilesKeywordService;
-import com.shq.cfa.service.FilesService;
-import com.shq.cfa.service.UserService;
+import com.shq.cfa.entity.FilesType;
+import com.shq.cfa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -24,12 +21,17 @@ public class FilesController {
     @Autowired
     private FilesKeywordService filesKeywordService;
 
+    @Autowired
+    private FilesTypeService filesTypeService;
+
     @GetMapping("/files")
     public String  list(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
                         @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
                         Model model){
         Page<Files> files = filesService.findFilesNoCriteria(pageIndex,pageSize);
+        List<FilesType> filesTypes = filesTypeService.findAll();
         model.addAttribute("datas",files);
+        model.addAttribute("types",filesTypes);
         return "file/list";
     }
     @GetMapping("/findFilesQuery")
@@ -147,77 +149,46 @@ public class FilesController {
         return "file/administrationList";
     }
     //案件添加
-    //SpringMVC自动将请求参数和入参对象的属性进行一一绑定；要求请求参数的名字和javaBean入参的对象里面的属性名是一样的
     @PostMapping("/file")
-    public String addFile(Files file, BindingResult bindingResult){
+    public String addFile(Model model,Files file, BindingResult bindingResult){
         System.out.println("保存的案件信息："+file);
         //保存案件
-        int penalWeight = 0;
-        List<FilesKeyword> penalList = filesKeywordService.findByType("刑事案卷");
-        for (FilesKeyword penal: penalList){
-            String keyword = penal.getKeyword();
-            Long weight = penal.getWeight();
-            String content = file.getStartCause() + file.getStartDesc() + file.getEndCause() + file.getSummary();
-            boolean include = content.contains(keyword);
-            if (include){
-                penalWeight += 1;
-            }
-        }
-        int civilWeight = 0;
-        List<FilesKeyword> civilList = filesKeywordService.findByType("民事案卷");
-        for (FilesKeyword civil: civilList){
-            String keyword = civil.getKeyword();
-            Long weight = civil.getWeight();
-            String content = file.getStartCause() + file.getStartDesc() + file.getEndCause() + file.getSummary();
-            boolean include = content.contains(keyword);
-            if (include){
-                civilWeight += 1;
-            }
-        }
-        int securityWeight = 0;
-        List<FilesKeyword> securityList = filesKeywordService.findByType("治安案卷");
-        for (FilesKeyword security: securityList){
-            String keyword = security.getKeyword();
-            Long weight = security.getWeight();
-            String content = file.getStartCause() + file.getStartDesc() + file.getEndCause() + file.getSummary();
-            boolean include = content.contains(keyword);
-            if (include){
-                securityWeight += 1;
-            }
-        }
-        int administrationWeight = 0;
-        List<FilesKeyword> administrationList = filesKeywordService.findByType("行政案卷");
-        for (FilesKeyword administration: administrationList){
-            String keyword = administration.getKeyword();
-            Long weight = administration.getWeight();
-            String content = file.getStartCause() + file.getStartDesc() + file.getEndCause() + file.getSummary();
-            boolean include = content.contains(keyword);
-            if (include){
-                administrationWeight += 1;
-            }
-        }
-        if (penalWeight > civilWeight){
-            if (penalWeight > securityWeight){
-                if (penalWeight > administrationWeight){
-                    file.setType("刑事案卷");
-                }else {
-                    file.setType("行政案卷");
-                }if (civilWeight > securityWeight){
-                            file.setType("民事案卷");
-                        }else {
-                            file.setType("治安案卷");
-                    }
-
+        int index = 0;
+        Float weights = 0f;
+        String content = file.getStartCause() + file.getStartDesc() + file.getEndCause() + file.getSummary();
+        List<FilesType> filesTypes = filesTypeService.findAll();
+        for (FilesType filesType : filesTypes){
+            List<FilesKeyword> keywords = filesKeywordService.findByType(filesType.getId());
+            Float weight = 0f;
+            for (FilesKeyword keyword: keywords){
+                boolean include = content.contains(keyword.getKeyword());
+                if (include){
+                    weight += keyword.getWeight();
                 }
-          }
-
+            }
+            if (weight >= weights){
+                weights = weight;
+                index += 1;
+            }
+        }
+        List<FilesKeyword> keywords = filesKeywordService.findByType(index);
+        for (FilesKeyword keyword: keywords){
+            boolean include = content.contains(keyword.getKeyword());
+            if (include){
+                keyword.setWeight(keyword.getWeight()+0.01f);
+                filesKeywordService.save(keyword);
+            }
+        }
+        file.setType(index);
+        FilesType type = filesTypeService.getFilesTypeById(index);
         filesService.saveFile(file);
+        model.addAttribute("msg", "案卷已归入"+type.getName());
         return "file/add";
     }
     @PostMapping("/penalfile")
     public String addPenalFile(Files file, BindingResult bindingResult){
         System.out.println("保存的案件信息："+file);
-        file.setType("刑事案卷");
+        file.setType(2);
         //保存案件
         filesService.saveFile(file);
         // redirect: 表示重定向到一个地址  /代表当前项目路径
@@ -227,7 +198,7 @@ public class FilesController {
     @PostMapping("/securityfile")
     public String addSecurityFile(Files file, BindingResult bindingResult){
         System.out.println("保存的案件信息："+file);
-        file.setType("治安案卷");
+        file.setType(3);
         //保存案件
         filesService.saveFile(file);
         // redirect: 表示重定向到一个地址  /代表当前项目路径
@@ -237,7 +208,7 @@ public class FilesController {
     @PostMapping("/civilfile")
     public String addCivilFile(Files file, BindingResult bindingResult){
         System.out.println("保存的案件信息："+file);
-        file.setType("民事案卷");
+        file.setType(1);
         //保存案件
         filesService.saveFile(file);
         // redirect: 表示重定向到一个地址  /代表当前项目路径
@@ -247,7 +218,7 @@ public class FilesController {
     @PostMapping("/administrationfile")
     public String addAdministrationFile(Files file, BindingResult bindingResult){
         System.out.println("保存的案件信息："+file);
-        file.setType("行政案卷");
+        file.setType(4);
         //保存案件
         filesService.saveFile(file);
         // redirect: 表示重定向到一个地址  /代表当前项目路径

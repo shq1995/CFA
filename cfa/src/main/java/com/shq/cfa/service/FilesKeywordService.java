@@ -10,12 +10,13 @@ public interface FilesKeywordService {
   FilesKeyword findOne(Integer id);
 
   FilesKeyword save(FilesKeyword filesKeyword);
+  FilesKeyword update(FilesKeyword filesKeyword);
 
   FilesKeyword findByKeywordLike(String keyword);
 
   List<FilesKeyword> findAll();
 
-  List<FilesKeyword> findByType(String type);
+  List<FilesKeyword> findByType(Integer type);
 
   void  removeFilesKeyword(Integer id);
 

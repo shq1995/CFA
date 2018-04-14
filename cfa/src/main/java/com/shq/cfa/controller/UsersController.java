@@ -10,8 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.thymeleaf.expression.Maps;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UsersController {
@@ -25,12 +30,13 @@ public class UsersController {
     @GetMapping("/users")
     public String  list(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
                         @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
-                        Model model){
+                        Model model,@ModelAttribute("msg") String message){
        // Pageable pageable = new PageRequest(pageIndex, pageSize);
         Page<User> users = userService.findUserNoCriteria(pageIndex,pageSize);
         //放在请求域中
        // model.addAttribute("datas",pageable);
         model.addAttribute("datas",users);
+        model.addAttribute("msg", message);
         // thymeleaf默认就会拼串
         // classpath:/templates/xxxx.html
         return "user/list";
@@ -52,9 +58,10 @@ public class UsersController {
     }
 
     @GetMapping("/auths")
-    public String  authList(Model model){
+    public String  authList(Model model,@ModelAttribute("msg") String message){
         List<Authority> authorities = authorityService.listAuthoritys();
         model.addAttribute("authorities",authorities);
+        model.addAttribute("msg", message);
         return "authority/list";
     }
 
@@ -64,10 +71,11 @@ public class UsersController {
     }
 
     @PostMapping("/auth")
-    public String addAuth(Authority auth,BindingResult bindingResult){
+    public ModelAndView addAuth(RedirectAttributes attrs,Authority auth,BindingResult bindingResult){
         System.out.println("保存的角色信息："+auth);
         authorityService.saveAuth(auth);
-        return "redirect:/auths";
+        attrs.addAttribute("msg", "角色添加成功！");
+        return new ModelAndView ("redirect:/auths");
     }
 
     @GetMapping("/auth/{id}")
@@ -78,16 +86,18 @@ public class UsersController {
     }
 
     @PutMapping("/auth")
-    public String updateAuth(Authority auth,BindingResult bindingResult){
+    public ModelAndView updateAuth(RedirectAttributes attrs, Authority auth, BindingResult bindingResult){
         System.out.println("修改的角色数据："+auth);
         authorityService.saveAuth(auth);
-        return "redirect:/auths";
+        attrs.addAttribute("msg", "角色修改成功！");
+        return new ModelAndView ("redirect:/auths");
     }
 
     @DeleteMapping("/auth/{id}")
-    public String deleteAuth(@PathVariable("id") Integer id){
+    public ModelAndView deleteAuth(RedirectAttributes attrs,@PathVariable("id") Integer id){
         authorityService.removeAuth(id);
-        return "redirect:/auths";
+        attrs.addAttribute("msg", "角色删除成功！");
+        return new ModelAndView ("redirect:/auths");
     }
 
     //来到员工添加页面
@@ -101,7 +111,7 @@ public class UsersController {
     //员工添加
     //SpringMVC自动将请求参数和入参对象的属性进行一一绑定；要求请求参数的名字和javaBean入参的对象里面的属性名是一样的
     @PostMapping("/user")
-    public String addUser(User user,BindingResult bindingResult){
+    public ModelAndView addUser(RedirectAttributes attrs,User user,BindingResult bindingResult){
         //来到员工列表页面
 
         System.out.println("保存的员工信息："+user);
@@ -109,7 +119,8 @@ public class UsersController {
         userService.saveUser(user);
         // redirect: 表示重定向到一个地址  /代表当前项目路径
         // forward: 表示转发到一个地址
-        return "redirect:/users";
+        attrs.addAttribute("msg", "用户添加成功！");
+        return new ModelAndView ("redirect:/users");
     }
 
     //来到修改页面，查出当前员工，在页面回显
@@ -137,17 +148,19 @@ public class UsersController {
 
     //员工修改；需要提交员工id；
     @PutMapping("/user")
-    public String updateUser(User user,BindingResult bindingResult){
+    public ModelAndView updateUser(RedirectAttributes attrs,User user,BindingResult bindingResult){
         System.out.println("修改的人员数据："+user);
         userService.saveUser(user);
-        return "redirect:/users";
+        attrs.addAttribute("msg", "用户修改成功！");
+        return new ModelAndView ("redirect:/users");
     }
 
     //员工删除
     @DeleteMapping("/user/{id}")
-    public String deleteUser(@PathVariable("id") Integer id){
+    public ModelAndView deleteUser(RedirectAttributes attrs,@PathVariable("id") Integer id){
         userService.removeUser(id);
-        return "redirect:/users";
+        attrs.addAttribute("msg", "用户删除成功！");
+        return new ModelAndView ("redirect:/users");
     }
 
 

@@ -40,7 +40,7 @@ public class Files implements Serializable {
 	private String keyword;
 
 	@Column
-	private String type;
+	private Integer type;
 
 	@NotBlank(message = "案号不能为空")
 	@Size(min=2, max=50)
@@ -140,7 +140,7 @@ public class Files implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Files(String title, String keyword, String type, String number, Date putDate, String principal, String accuser, String defendant, String agent, String agentDepartment, Date agentDate, String source, String request, Integer frequency, String startCause, String startDesc, Date endTime, String endCause, String endDesc, String pay, String summary, String content, Date createTime, Date updateTime) {
+	public Files(String title, String keyword, Integer type, String number, Date putDate, String principal, String accuser, String defendant, String agent, String agentDepartment, Date agentDate, String source, String request, Integer frequency, String startCause, String startDesc, Date endTime, String endCause, String endDesc, String pay, String summary, String content, Date createTime, Date updateTime) {
 		this.title = title;
 		this.keyword = keyword;
 		this.type = type;
