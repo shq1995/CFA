@@ -8,10 +8,12 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>角色添加/编辑</title>
+		<title>关键字编辑</title>
 		<link rel="icon" type="image/x-icon" th:href="@{/asserts/img/document.png}">
 		<!-- Bootstrap core CSS -->
 		<link href="asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
+		<!-- toastr CSS -->
+		<link href="asserts/css/toastr.min.css" th:href="@{/asserts/css/toastr.min.css}" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
 		<link href="asserts/css/dashboard.css" th:href="@{/asserts/css/dashboard.css}" rel="stylesheet">
@@ -51,33 +53,36 @@
 		<div class="container-fluid">
 			<div class="row">
 				<!--引入侧边栏-->
-				<div th:replace="commons/bar::#sidebar(activeUri='users')"></div>
+				<div th:replace="commons/bar::#sidebar(activeUri='keywords')"></div>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 					<p style="text-align: center" class="control-label text-danger" th:text="${err!=''}?${err}"></p>
 					<!--需要区分是员工修改还是添加；-->
-					<form th:action="@{/auth}" method="post">
-						<!--发送put请求修改员工数据-->
+					<form th:action="@{/keyword}" method="post">
+						<!--发送put请求修改关键字数据-->
 						<!--
 						1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）
 						2、页面创建一个post表单
 						3、创建一个input项，name="_method";值就是我们指定的请求方式
 						-->
-						<input type="hidden" name="_method" value="put" th:if="${auth!=null}"/>
-						<input type="hidden" name="id" th:if="${auth!=null}" th:value="${auth.id}">
+						<input type="hidden" name="_method" value="put" th:if="${filesKeyword!=null}"/>
+						<input type="hidden" name="id" th:if="${filesKeyword!=null}" th:value="${filesKeyword.id}">
 						<div class="form-group">
 							<div class="form-group">
-								<label>角色名称</label>
-								<input name="name" type="text" class="form-control" placeholder="请输入角色名称" th:value="${auth!=null}?${auth.name}">
+								<label>案卷分类</label>
+								<select class="form-control" name="type">
+									<option th:selected="${filesKeyword!=null}?${type.id == filesKeyword.type}" th:value="${type.id}" th:each="type:${types}" th:text="${type.name}">1</option>
+								</select>
 							</div>
-				<!--		<div class="form-group">
-							<label>department</label>
-							&lt;!&ndash;提交的是部门的id&ndash;&gt;
-							<select class="form-control" name="department.id">
-								<option th:selected="${user!=null}?${authority.id == user.authority.id}" th:value="${authority.id}" th:each="dept:${authoritys}" th:text="${authority.name}">1</option>
-							</select>
-						</div>-->
-						<button type="submit" class="btn btn-primary" th:text="${auth!=null}?'修改':'添加'">添加</button>
+							<div class="form-group">
+								<label>关键字</label>
+								<input name="keyword" type="text" class="form-control" placeholder="请输入关键字" th:value="${filesKeyword!=null}?${filesKeyword.keyword}">
+							</div>
+							<div class="form-group">
+								<label>关键字权重</label>
+								<input name="weight" type="text" class="form-control" placeholder="请输入关键字权重" th:value="${filesKeyword!=null}?${filesKeyword.weight}">
+							</div>
+						<button type="submit" class="btn btn-primary" th:text="'修改'">添加</button>
 						</div>
 					</form>
 				</main>
@@ -90,7 +95,7 @@
 		<script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js" th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>
 		<script type="text/javascript" src="asserts/js/popper.min.js" th:src="@{/webjars/popper.js/1.11.1/dist/popper.js}"></script>
 		<script type="text/javascript" src="asserts/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.js}"></script>
-
+		<script src="/asserts/js/toastr.min.js" th:src="@{/asserts/js/toastr.min.js}"></script>
 		<!-- Icons -->
 		<script type="text/javascript" src="asserts/js/feather.min.js" th:src="@{/asserts/js/feather.min.js}"></script>
 		<script>

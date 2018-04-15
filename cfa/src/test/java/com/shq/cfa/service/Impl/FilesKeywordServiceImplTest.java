@@ -33,7 +33,9 @@ public class FilesKeywordServiceImplTest {
 
   @Test
   public void findByKeyword() throws Exception {
+/*
     FilesKeyword filesKeyword = filesKeywordService.findByKeywordLike("民事");
+*/
   }
 
   @Test

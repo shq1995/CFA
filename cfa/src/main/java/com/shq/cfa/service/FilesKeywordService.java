@@ -12,7 +12,7 @@ public interface FilesKeywordService {
   FilesKeyword save(FilesKeyword filesKeyword);
   FilesKeyword update(FilesKeyword filesKeyword);
 
-  FilesKeyword findByKeywordLike(String keyword);
+  FilesKeyword findByTypeAndKeyword(Integer type,String keyword);
 
   List<FilesKeyword> findAll();
 

@@ -13,7 +13,7 @@ import java.util.List;
  * @desc 案卷关键字
  **/
 public interface FilesKeywordRepository extends JpaRepository<FilesKeyword, Integer>,JpaSpecificationExecutor<FilesKeyword> {
-  FilesKeyword findByKeywordLike(String keyWord);
+  FilesKeyword findByTypeAndKeyword(Integer type,String keyWord);
   List<FilesKeyword> findByType(Integer type);
 }
 

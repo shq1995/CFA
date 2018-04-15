@@ -5,6 +5,7 @@ import javax.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -25,6 +26,7 @@ public class Authority {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
 	private Integer id; // 用户的唯一标识
 
+	@NotBlank(message = "角色名称不能为空!")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String name;
 

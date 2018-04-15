@@ -94,6 +94,12 @@
 								<td th:text="${auth.name}"></td>
 							</tr>
 							<tr>
+								<td style="background-color:lavender;">账号</td>
+								<td th:text="${user.username}"></td>
+								<td style="background-color:lavender;">密码</td>
+								<td th:text="${user.password}"></td>
+							</tr>
+							<tr>
 								<td style="background-color:lavender;">创建时间</td>
 								<td th:text="${#dates.format(user.createTime, 'yyyy-MM-dd HH:mm')}"></td>
 								<td style="background-color:lavender;">更新时间</td>

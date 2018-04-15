@@ -45,8 +45,8 @@ public class FilesKeywordServiceImpl implements FilesKeywordService{
   }
 
   @Override
-  public FilesKeyword findByKeywordLike(String keyword) {
-    return repository.findByKeywordLike(keyword);
+  public FilesKeyword findByTypeAndKeyword(Integer type,String keyword) {
+    return repository.findByTypeAndKeyword(type,keyword);
   }
 
   @Override

@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
@@ -30,10 +31,12 @@ public class User implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
   private Integer id; // 用户的唯一标识
 
-  @Column
+  @NotBlank(message = "部门不能为空!")
+  @Column(nullable = false)
   private String department;
 
-  @Column(nullable = true, length = 1)
+  @NotNull(message = "性别不能为空!")
+  @Column(nullable = false, length = 1)
   private Integer sex;
 
   @Column(nullable = true)
@@ -52,24 +55,26 @@ public class User implements Serializable {
   @Column(nullable = true)
   private String politics;
 
-  @NotBlank(message = "姓名不能为空")
-  @Length(min = 2, max = 20, message="长度不能小于2位大于20位")
+  @NotBlank(message = "姓名不能为空!")
+  @Length(min = 2, max = 20, message="长度不能小于2位大于20位!")
   @Column(nullable = false, length = 20)
   private String name;
 
-  @NotBlank(message = "邮箱不能为空")
+  @NotBlank(message = "邮箱不能为空!")
   @Size(max = 50)
-  @Email(message = "邮箱格式不对")
-  @Column(nullable = false, length = 50, unique = true)
+  @Email(message = "邮箱格式不对!")
+  @Column(nullable = false, length = 50)
   private String email;
 
-  @NotBlank(message = "账号不能为空")
-  @Length(min = 2, max = 20, message="长度不能小于2位大于20位")
+  @NotBlank(message = "账号不能为空!")
+  @Length(min = 2, max = 20, message="长度不能小于5位大于20位!")
   @Column(nullable = false, length = 20, unique = true)
   private String username; // 用户账号，用户登录时的唯一标识
 
-  @NotBlank(message = "密码不能为空")
+  @NotBlank(message = "密码不能为空!")
   @Size(max = 100)
+  @Length(min = 2, max = 20, message="密码不能小于6位大于15位!")
+  @Pattern(regexp = "^[\\da-zA-Z]*\\d+[a-zA-Z]+[\\da-zA-Z]*$", message = "密码必须由字母与数字组成！")
   @Column(nullable = false)
   private String password; // 登录时密码
 
@@ -79,7 +84,7 @@ public class User implements Serializable {
   @Column(nullable = true)
   private String address;
 
-  @NotNull(message = "角色不能为空")
+  @NotNull(message = "角色不能为空!")
   @Column(nullable = false)
   private Integer auth;
 

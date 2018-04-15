@@ -43,6 +43,11 @@ public class FilesTypeServiceImpl implements FilesTypeService {
 	}
 
 	@Override
+	public FilesType getFilesTypeByName(String name) {
+		return filesTypeRepository.findByName(name);
+	}
+
+	@Override
 	public FilesType getFilesTypeById(Integer id) {
 		return filesTypeRepository.findOne(id);
 	}

@@ -13,6 +13,7 @@ public interface FilesTypeService {
 	void removeFilesTppe(Integer id);
 
 	FilesType updateFilesType(FilesType filesType);
+	FilesType getFilesTypeByName(String name);
 
 	FilesType getFilesTypeById(Integer id);
 	List<FilesType> findAll();

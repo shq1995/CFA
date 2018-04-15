@@ -12,8 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class FilesTypeController {
@@ -25,9 +30,10 @@ public class FilesTypeController {
     @GetMapping("/filesTypes")
     public String  list(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
                         @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
-                        Model model){
+                        Model model,@ModelAttribute("msg") String message){
         Page<FilesType> filesTypes = filesTypeService.findFilesTypeNoCriteria(pageIndex,pageSize);
         model.addAttribute("datas",filesTypes);
+        model.addAttribute("msg", message);
         return "filesType/list";
     }
 
@@ -50,9 +56,25 @@ public class FilesTypeController {
 
     //添加
     @PostMapping("/filesType")
-    public String addUser(FilesType filesType,BindingResult bindingResult){
+    public ModelAndView addUser(Model model, RedirectAttributes attrs, @Valid FilesType filesType, BindingResult bindingResult){
+        System.out.println("保存的案卷类型信息："+filesType);
+        //保存案卷类型
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("err", bindingResult.getFieldError().getDefaultMessage());
+            System.out.println(bindingResult.getFieldError().getDefaultMessage());
+            Map<String,Object> map = new HashMap<>();
+            map.put("type",filesType);
+            return new ModelAndView("filesType/add");
+        }
+        if ((filesTypeService.getFilesTypeByName(filesType.getName()))!=null){
+            model.addAttribute("err", "案卷名称已存在！");
+            Map<String,Object> map = new HashMap<>();
+            map.put("type",filesType);
+            return new ModelAndView("filesType/add");
+        }
         filesTypeService.saveFilesType(filesType);
-        return "redirect:/filesTypes";
+        attrs.addAttribute("msg", "案卷类型添加成功！");
+        return new ModelAndView ("redirect:/filesTypes");
     }
 
     @GetMapping("/filesTypedetail/{id}")
@@ -66,12 +88,28 @@ public class FilesTypeController {
     public String toEditPage(@PathVariable("id") Integer id,Model model){
         FilesType filesType = filesTypeService.getFilesTypeById(id);
         model.addAttribute("type",filesType);
-        return "filesType/add";
+        return "filesType/edit";
+    }
+
+    @PutMapping("/filesType")
+    public ModelAndView updateUser(Model model,RedirectAttributes attrs,@Valid FilesType filesType,BindingResult bindingResult){
+        System.out.println("修改的案卷类型数据："+filesType);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("err", bindingResult.getFieldError().getDefaultMessage());
+            System.out.println(bindingResult.getFieldError().getDefaultMessage());
+            Map<String,Object> map = new HashMap<>();
+            map.put("type",filesType);
+            return new ModelAndView("filesType/edit");
+        }
+        filesTypeService.saveFilesType(filesType);
+        attrs.addAttribute("msg", "案卷类型修改成功！");
+        return new ModelAndView ("redirect:/filesTypes");
     }
     //删除
     @DeleteMapping("/filesType/{id}")
-    public String deleteUser(@PathVariable("id") Integer id){
+    public ModelAndView deleteUser(RedirectAttributes attrs,@PathVariable("id") Integer id){
         filesTypeService.removeFilesTppe(id);
-        return "redirect:/filesTypes";
+        attrs.addAttribute("msg", "案卷类型删除成功！");
+        return new ModelAndView ("redirect:/filesTypes");
     }
 }

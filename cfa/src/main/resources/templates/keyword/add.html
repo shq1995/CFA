@@ -56,6 +56,7 @@
 				<div th:replace="commons/bar::#sidebar(activeUri='keywords')"></div>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+					<p style="text-align: center" class="control-label text-danger" th:text="${err!=''}?${err}"></p>
 					<!--需要区分是员工修改还是添加；-->
 					<form th:action="@{/keyword}" method="post">
 						<!--发送put请求修改关键字数据-->
@@ -64,7 +65,6 @@
 						2、页面创建一个post表单
 						3、创建一个input项，name="_method";值就是我们指定的请求方式
 						-->
-						<input type="hidden" name="_method" value="put" th:if="${filesKeyword!=null}"/>
 						<input type="hidden" name="id" th:if="${filesKeyword!=null}" th:value="${filesKeyword.id}">
 						<div class="form-group">
 							<div class="form-group">
@@ -81,7 +81,7 @@
 								<label>关键字权重</label>
 								<input name="weight" type="text" class="form-control" placeholder="请输入关键字权重" th:value="${filesKeyword!=null}?${filesKeyword.weight}">
 							</div>
-						<button type="submit" class="btn btn-primary" th:text="${filesKeyword!=null}?'修改':'添加'">添加</button>
+						<button type="submit" class="btn btn-primary" th:text="'添加'">添加</button>
 						</div>
 					</form>
 				</main>
