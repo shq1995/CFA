@@ -14,6 +14,7 @@ public interface FilesTypeService {
 
 	FilesType updateFilesType(FilesType filesType);
 	FilesType getFilesTypeByName(String name);
+	List<FilesType> getFilesTypeByBasics(Integer basics);
 
 	FilesType getFilesTypeById(Integer id);
 	List<FilesType> findAll();

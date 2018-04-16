@@ -37,6 +37,9 @@ public class FilesType {
   @Column(nullable = false) // 映射为字段，值不能为空
   private String abbreviation;
 
+  @Column(nullable = false)
+  private Integer basics;
+
   @Temporal(TemporalType.TIMESTAMP)
   @Column(updatable = false)
   @org.hibernate.annotations.CreationTimestamp  // 由数据库自动创建时间
@@ -50,10 +53,11 @@ public class FilesType {
   protected FilesType() {
   }
 
-  public FilesType(String name, String state, String abbreviation, Timestamp createTime, Timestamp updateTime) {
+  public FilesType(String name, String state, String abbreviation,Integer basics, Timestamp createTime, Timestamp updateTime) {
     this.name = name;
     this.state = state;
     this.abbreviation = abbreviation;
+    this.basics = basics;
     this.createTime = createTime;
     this.updateTime = updateTime;
   }

@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>刑事案件列表</title>
+		<title>其它案件列表</title>
 		<link rel="icon" type="image/x-icon" th:href="@{/asserts/img/document.png}">
 		<!-- Bootstrap core CSS -->
 		<link href="asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
@@ -51,16 +51,16 @@
 		<div class="container-fluid">
 			<div class="row">
 				<!--引入侧边栏-->
-				<div th:replace="commons/bar::#sidebar(activeUri='penal')"></div>
+				<div th:replace="commons/bar::#sidebar(activeUri='others')"></div>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 					<p style="text-align:center; color: #b3d7ff" th:text="${msg}"></p>
 					<div class="row">
 						<div class="col-md-3">
-							<a class="btn btn-sm btn-success" href="user" th:href="@{/penaladd}">刑事案卷添加</a>
+							<a class="btn btn-sm btn-success" href="user" th:href="@{/othersadd}">其它案卷添加</a>
 						</div>
 						<div class="col-md-3">
-							<form th:action="@{/penalQuery}"  th:method="get">
+							<form th:action="@{/civilQuery}"  th:method="get">
 								<div class="form-group">
 									<div style="display: flex">
 										<input type="text" style="width: 150px;height: 32px;" class="form-control" name="title" placeholder="请输入案件标题" />&nbsp;&nbsp;
@@ -90,7 +90,7 @@
 							<tbody>
 								<tr th:each="file:${datas}">
 									<td th:text="${file.id}"></td>
-									<td ><a  class="rb-title" th:href="@{/penalfiledetail/}+${file.id}" th:text="${file.title}"></a></td>
+									<td ><a  class="rb-title" th:href="@{/securityfiledetail/}+${file.id}" th:text="${file.title}"></a></td>
 									<td th:text="${file.number}"></td>
 									<td th:text="${file.type}"></td>
 									<td th:text="${file.principal}"></td>
@@ -98,7 +98,7 @@
 									<td>[[${user.defendant}]]</td>
 									<td th:text="${user.agentDepartment}"></td>
 									<td>
-										<a class="btn btn-sm btn-primary" th:href="@{/penalfile/}+${file.id}">编辑</a>
+										<a class="btn btn-sm btn-primary" th:href="@{/securityfile/}+${file.id}">编辑</a>
 										<button th:attr="del_uri=@{/file/}+${file.id}" class="btn btn-sm btn-danger deleteBtn">删除</button>
 									</td>
 								</tr>

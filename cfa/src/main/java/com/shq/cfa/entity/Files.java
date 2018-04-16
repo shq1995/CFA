@@ -124,6 +124,9 @@ public class Files implements Serializable {
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String content;
 
+	@Column(nullable = false)
+	private Integer basics;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(updatable = false)
 	@org.hibernate.annotations.CreationTimestamp  // 由数据库自动创建时间
@@ -139,7 +142,7 @@ public class Files implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Files(String title, String keyword, Integer type, String number, Date putDate, String principal, String accuser, String defendant, String agent, String agentDepartment, Date agentDate, String source, String request, Integer frequency, String startCause, String startDesc, Date endTime, String endCause, String endDesc, String pay, String summary, String content, Date createTime, Date updateTime) {
+	public Files(String title, String keyword, Integer type, String number, Date putDate, String principal, String accuser, String defendant, String agent, String agentDepartment, Date agentDate, String source, String request, Integer frequency, String startCause, String startDesc, Date endTime, String endCause, String endDesc, String pay, String summary, String content, Date createTime, Date updateTime,Integer basics) {
 		this.title = title;
 		this.keyword = keyword;
 		this.type = type;
@@ -162,6 +165,7 @@ public class Files implements Serializable {
 		this.pay = pay;
 		this.summary = summary;
 		this.content = content;
+		this.basics = basics;
 		this.createTime = createTime;
 		this.updateTime = updateTime;
 	}

@@ -107,7 +107,7 @@ public class FilesServiceImpl implements FilesService {
 	}
 
 	@Override
-	public Page<Files> findFilesCriteria(Integer page, Integer size, String title, String number, String type) {
+	public Page<Files> findFilesCriteria(Integer page, Integer size, String title, String number, Integer type) {
 		Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "id");
 		Page<Files> userPage = filesRepository.findAll(new Specification<Files>(){
 			@Override
@@ -130,7 +130,7 @@ public class FilesServiceImpl implements FilesService {
 	}
 
 	@Override
-	public Page<Files> findFilesTypeCriteria(Integer page, Integer size, String type) {
+	public Page<Files> findFilesTypeCriteria(Integer page, Integer size, Integer type) {
 		Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "id");
 		Page<Files> userPage = filesRepository.findAll(new Specification<Files>(){
 			@Override
@@ -138,6 +138,23 @@ public class FilesServiceImpl implements FilesService {
 				List<Predicate> list = new ArrayList<Predicate>();
 				if(null!=type&&!"".equals(type)){
 					list.add(criteriaBuilder.equal(root.get("type").as(String.class), type));
+				}
+				Predicate[] p = new Predicate[list.size()];
+				return criteriaBuilder.and(list.toArray(p));
+			}
+		},pageable);
+		return userPage;
+	}
+
+	@Override
+	public Page<Files> findBasicsCriteria(Integer page, Integer size, Integer basics) {
+		Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "id");
+		Page<Files> userPage = filesRepository.findAll(new Specification<Files>(){
+			@Override
+			public Predicate toPredicate(Root<Files> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+				List<Predicate> list = new ArrayList<Predicate>();
+				if(null!=basics&&!"".equals(basics)){
+					list.add(criteriaBuilder.equal(root.get("type").as(String.class), basics));
 				}
 				Predicate[] p = new Predicate[list.size()];
 				return criteriaBuilder.and(list.toArray(p));

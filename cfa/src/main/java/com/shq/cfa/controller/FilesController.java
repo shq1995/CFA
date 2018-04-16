@@ -53,38 +53,29 @@ public class FilesController {
     //来到案件添加页面
     @GetMapping("/file")
     public String toAddPage(Model model){
-        List<FilesType> filesTypes = filesTypeService.findAll();
-        model.addAttribute("types",filesTypes);
         return "file/add";
     }
 
     @GetMapping("/administrationadd")
     public String toAdministrationAddPage(Model model){
-        List<FilesType> filesTypes = filesTypeService.findAll();
-        model.addAttribute("types",filesTypes);
         return "file/administrationAdd";
     }
 
     @GetMapping("/securityadd")
     public String toSecurityAddPage(Model model){
-        List<FilesType> filesTypes = filesTypeService.findAll();
-        model.addAttribute("types",filesTypes);
         return "file/securityAdd";
     }
 
     @GetMapping("/civiladd")
     public String toCivilAddPage(Model model){
-        List<FilesType> filesTypes = filesTypeService.findAll();
-        model.addAttribute("types",filesTypes);
         return "file/civilAdd";
     }
 
     @GetMapping("/penaladd")
     public String toPenalAddPage(Model model){
-        List<FilesType> filesTypes = filesTypeService.findAll();
-        model.addAttribute("types",filesTypes);
         return "file/penalAdd";
     }
+
 
 
     //来到刑事案件页面
@@ -92,7 +83,7 @@ public class FilesController {
     public String toPagePenal(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
                               @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
                               Model model){
-        Page<Files> files = filesService.findFilesTypeCriteria(pageIndex,pageSize,"刑事案卷");
+        Page<Files> files = filesService.findFilesTypeCriteria(pageIndex,pageSize,2);
         model.addAttribute("datas",files);
         return "file/penalList";
     }
@@ -102,16 +93,38 @@ public class FilesController {
                                        @RequestParam(value="title",required=false,defaultValue="") String title,
                                        @RequestParam(value="number",required=false,defaultValue="") String number,
                               Model model){
-        Page<Files> files = filesService.findFilesCriteria(pageIndex,pageSize,title,number,"刑事案卷");
+        Page<Files> files = filesService.findFilesCriteria(pageIndex,pageSize,title,number,2);
         model.addAttribute("datas",files);
         return "file/penalList";
     }
-    //来到刑事案件页面
+
+    @GetMapping("/others")
+    public String toPageOthers(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
+                              @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
+                              Model model){
+        List<FilesType> filesTypes = filesTypeService.getFilesTypeByBasics(2);
+        Page<Files> files = filesService.findBasicsCriteria(pageIndex,pageSize,2);
+        model.addAttribute("datas",files);
+        model.addAttribute("types",filesTypes);
+        return "file/othersList";
+    }
+    @GetMapping("/othersQuery")
+    public String toPageOthersCondition(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
+                                       @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
+                                       @RequestParam(value="title",required=false,defaultValue="") String title,
+                                       @RequestParam(value="number",required=false,defaultValue="") String number,
+                                        @RequestParam(value="number",required=false,defaultValue="") Integer type,
+                                       Model model){
+        Page<Files> files = filesService.findFilesCriteria(pageIndex,pageSize,title,number,type);
+        model.addAttribute("datas",files);
+        return "file/othersList";
+    }
+
     @GetMapping("/civil")
     public String toPageCivil(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
                               @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
                              Model model){
-        Page<Files> files = filesService.findFilesTypeCriteria(pageIndex,pageSize,"民事案卷");
+        Page<Files> files = filesService.findFilesTypeCriteria(pageIndex,pageSize,1);
         model.addAttribute("datas",files);
         return "file/civilList";
     }
@@ -121,16 +134,16 @@ public class FilesController {
                                        @RequestParam(value="title",required=false,defaultValue="") String title,
                                        @RequestParam(value="number",required=false,defaultValue="") String number,
                               Model model){
-        Page<Files> files = filesService.findFilesCriteria(pageIndex,pageSize,title,number,"民事案卷");
+        Page<Files> files = filesService.findFilesCriteria(pageIndex,pageSize,title,number,1);
         model.addAttribute("datas",files);
         return "file/civilList";
     }
-    //来到刑事案件页面
+
     @GetMapping("/security")
     public String toPageSecurity(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
                                  @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
                                  Model model){
-        Page<Files> files = filesService.findFilesTypeCriteria(pageIndex,pageSize,"治安案卷");
+        Page<Files> files = filesService.findFilesTypeCriteria(pageIndex,pageSize,3);
         model.addAttribute("datas",files);
         return "file/securityList";
     }
@@ -140,16 +153,16 @@ public class FilesController {
                                        @RequestParam(value="title",required=false,defaultValue="") String title,
                                        @RequestParam(value="number",required=false,defaultValue="") String number,
                                        Model model){
-        Page<Files> files = filesService.findFilesCriteria(pageIndex,pageSize,title,number,"治安案卷");
+        Page<Files> files = filesService.findFilesCriteria(pageIndex,pageSize,title,number,3);
         model.addAttribute("datas",files);
         return "file/securityList";
     }
-    //来到刑事案件页面
+
     @GetMapping("/administration")
     public String toPageAdministration(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
                                        @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
                                        Model model){
-        Page<Files> files = filesService.findFilesTypeCriteria(pageIndex,pageSize,"行政案卷");
+        Page<Files> files = filesService.findFilesTypeCriteria(pageIndex,pageSize,4);
         model.addAttribute("datas",files);
         return "file/administrationList";
     }
@@ -159,7 +172,7 @@ public class FilesController {
                                           @RequestParam(value="title",required=false,defaultValue="") String title,
                                           @RequestParam(value="number",required=false,defaultValue="") String number,
                                           Model model){
-        Page<Files> files = filesService.findFilesCriteria(pageIndex,pageSize,title,number,"行政案卷");
+        Page<Files> files = filesService.findFilesCriteria(pageIndex,pageSize,title,number,4);
         model.addAttribute("datas",files);
         return "file/administrationList";
     }
@@ -207,12 +220,16 @@ public class FilesController {
         }
         file.setType(index);
         FilesType type = filesTypeService.getFilesTypeById(index);
+        if (index >4){
+            file.setBasics(2);
+        }
         filesService.saveFile(file);
         model.addAttribute("msg", "案卷已归入"+type.getName());
         return "file/add";
     }
     @PostMapping("/penalfile")
     public String addPenalFile(Files file, BindingResult bindingResult){
+        file.setBasics(1);
         System.out.println("保存的案件信息："+file);
         file.setType(2);
         //保存案件
@@ -223,6 +240,7 @@ public class FilesController {
     }
     @PostMapping("/securityfile")
     public String addSecurityFile(Files file, BindingResult bindingResult){
+        file.setBasics(1);
         System.out.println("保存的案件信息："+file);
         file.setType(3);
         //保存案件
@@ -233,6 +251,7 @@ public class FilesController {
     }
     @PostMapping("/civilfile")
     public String addCivilFile(Files file, BindingResult bindingResult){
+        file.setBasics(1);
         System.out.println("保存的案件信息："+file);
         file.setType(1);
         //保存案件
@@ -243,6 +262,7 @@ public class FilesController {
     }
     @PostMapping("/administrationfile")
     public String addAdministrationFile(Files file, BindingResult bindingResult){
+        file.setBasics(1);
         System.out.println("保存的案件信息："+file);
         file.setType(4);
         //保存案件
@@ -292,35 +312,108 @@ public class FilesController {
         return "file/civilFileDetail";
     }
 
+    @GetMapping("/othersfiledetail/{id}")
+    public String fileOthersDetail(@PathVariable("id") Integer id,Model model){
+        Files file = filesService.getFileById(id);
+        model.addAttribute("file",file);
+        return "file/othersFileDetail";
+    }
+
+    @GetMapping("/othersfile/{id}")
+    public String toOthersEditPage(@PathVariable("id") Integer id,Model model){
+        Files file = filesService.getFileById(id);
+        model.addAttribute("file",file);
+        return "file/othersEdit";
+    }
+
+    @GetMapping("/penalfile/{id}")
+    public String toPenalEditPage(@PathVariable("id") Integer id,Model model){
+        Files file = filesService.getFileById(id);
+        model.addAttribute("file",file);
+        return "file/penalEdit";
+    }
     //案卷修改；
     @PutMapping("/penalfile")
     public String updatePenalFile(Files file,BindingResult bindingResult){
+        if (file.getType()>4){
+            file.setBasics(2);
+        }else {
+            file.setBasics(1);
+        }
         System.out.println("修改的案件数据："+file);
         filesService.saveFile(file);
         return "redirect:/penalList";
     }
 
+    @GetMapping("/civilfile/{id}")
+    public String toCivilEditPage(@PathVariable("id") Integer id,Model model){
+        Files file = filesService.getFileById(id);
+        model.addAttribute("file",file);
+        return "file/civilEdit";
+    }
+
     @PutMapping("/civilfile")
     public String updateCivilFile(Files file,BindingResult bindingResult){
+        if (file.getType()>4){
+            file.setBasics(2);
+        }else {
+            file.setBasics(1);
+        }
         System.out.println("修改的案件数据："+file);
         filesService.saveFile(file);
         return "redirect:/civilList";
     }
 
+    @GetMapping("/securityfile/{id}")
+    public String toSecurityEditPage(@PathVariable("id") Integer id,Model model){
+        Files file = filesService.getFileById(id);
+        model.addAttribute("file",file);
+        return "file/securityEdit";
+    }
+
     @PutMapping("/securityfile")
     public String updateSecurityFile(Files file,BindingResult bindingResult){
+        if (file.getType()>4){
+            file.setBasics(2);
+        }else {
+            file.setBasics(1);
+        }
         System.out.println("修改的案件数据："+file);
         filesService.saveFile(file);
         return "redirect:/securityList";
     }
 
+    @GetMapping("/administrationfile/{id}")
+    public String toAdministrationEditPage(@PathVariable("id") Integer id,Model model){
+        Files file = filesService.getFileById(id);
+        model.addAttribute("file",file);
+        return "file/administrationEdit";
+    }
+
     @PutMapping("/administrationfile")
     public String updateAdministrationFile(Files file,BindingResult bindingResult){
+        if (file.getType()>4){
+            file.setBasics(2);
+        }else {
+            file.setBasics(1);
+        }
         System.out.println("修改的案件数据："+file);
         filesService.saveFile(file);
         return "redirect:/administrationList";
     }
-    //案卷删除
+
+    @PutMapping("/othersfile")
+    public String updateOthersFile(Files file,BindingResult bindingResult) {
+        if (file.getType() > 4) {
+            file.setBasics(2);
+        } else {
+            file.setBasics(1);
+        }
+        System.out.println("修改的案件数据：" + file);
+        filesService.saveFile(file);
+        return "redirect:/othersList";
+    }
+        //案卷删除
     @DeleteMapping("/file/{id}")
     public String deleteFile(@PathVariable("id") Integer id){
         filesService.removeFile(id);

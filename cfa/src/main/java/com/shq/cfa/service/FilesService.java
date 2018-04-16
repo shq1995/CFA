@@ -52,6 +52,7 @@ public interface FilesService {
 	Page<Files> findFilesNoCriteria(Integer page, Integer size);
 
 	Page<Files> findFileCriteria(Integer page,Integer size,String title,String number);
-	Page<Files> findFilesCriteria(Integer page,Integer size,String title,String number,String type);
-	Page<Files> findFilesTypeCriteria(Integer page,Integer size,String type);
+	Page<Files> findFilesCriteria(Integer page,Integer size,String title,String number,Integer type);
+	Page<Files> findFilesTypeCriteria(Integer page,Integer size,Integer type);
+	Page<Files> findBasicsCriteria(Integer page,Integer size,Integer basics);
 }

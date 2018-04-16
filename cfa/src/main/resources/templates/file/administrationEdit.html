@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>行政案件添加</title>
+		<title>行政案件编辑</title>
 		<link rel="icon" type="image/x-icon" th:href="@{/asserts/img/document.png}">
 		<!-- Bootstrap core CSS -->
 		<link href="asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
@@ -62,6 +62,7 @@
 						2、页面创建一个post表单
 						3、创建一个input项，name="_method";值就是我们指定的请求方式
 						-->
+						<input type="hidden" name="_method" value="put" th:if="${file!=null}"/>
 						<input type="hidden" name="id" th:if="${file!=null}" th:value="${file.id}">
 						<div class="form-group">
 							<div class="row">
@@ -167,7 +168,7 @@
 								<option th:selected="${user!=null}?${authority.id == user.authority.id}" th:value="${authority.id}" th:each="dept:${authoritys}" th:text="${authority.name}">1</option>
 							</select>
 						</div>-->
-						<button type="submit" class="btn btn-primary" th:text="'添加'">添加</button>
+						<button type="submit" class="btn btn-primary" th:text="'修改'">添加</button>
 						</div>
 					</form>
 				</main>
