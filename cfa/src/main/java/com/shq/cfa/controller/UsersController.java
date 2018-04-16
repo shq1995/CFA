@@ -135,13 +135,13 @@ public class UsersController {
             model.addAttribute("auth",authority);
             Map<String,Object> map = new HashMap<>();
             map.put("user",user);
-            return new ModelAndView("user/add");
+            return new ModelAndView("user/add",map);
         }
         if ((userService.getUserByName(user.getName()))!=null){
             model.addAttribute("err", "账号已存在！");
             Map<String,Object> map = new HashMap<>();
             map.put("user",user);
-            return new ModelAndView("user/add");
+            return new ModelAndView("user/add",map);
         }
         userService.saveUser(user);
         // redirect: 表示重定向到一个地址  /代表当前项目路径
@@ -184,7 +184,7 @@ public class UsersController {
             model.addAttribute("auth",authority);
             Map<String,Object> map = new HashMap<>();
             map.put("user",user);
-            return new ModelAndView("user/edit");
+            return new ModelAndView("user/edit",map);
         }
         userService.saveUser(user);
         attrs.addAttribute("msg", "用户修改成功！");

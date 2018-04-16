@@ -29,99 +29,98 @@ public class Files implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
 	private Integer id; // 案件的唯一标识
 
-	@NotBlank(message = "标题不能为空")
+	@NotBlank(message = "标题不能为空！")
 	@Size(min=2, max=50)
 	@Column(nullable = false, length = 50) // 映射为字段，值不能为空
 	private String title;
 
-	@NotBlank(message = "关键字不能为空")
-	@Size(min=2)
+	@NotBlank(message = "关键字不能为空！")
+	@Size(min=2,message = "关键字长度不能小于2！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String keyword;
 
 	@Column
 	private Integer type;
 
-	@NotBlank(message = "案号不能为空")
-	@Size(min=2, max=50)
+	@NotBlank(message = "案号不能为空！")
+	@Size(min=2, max=50,message = "案号长度必须在2到50之间！")
 	@Column(nullable = false, length = 50) // 映射为字段，值不能为空
 	private String number;
 
-	@NotNull(message = "收诉状日期不能为空")
+	@NotNull(message = "收诉状日期不能为空！")
 	@Temporal(TemporalType.DATE)// 映射为字段，值不能为空
 	private Date putDate;
 
-	@NotBlank(message = "负责人不能为空")
+	@NotBlank(message = "负责人不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String principal;
 
-	@NotBlank(message = "原告不能为空")
+	@NotBlank(message = "原告不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String accuser;
 
-	@NotBlank(message = "被告不能为空")
+	@NotBlank(message = "被告不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String defendant;
 
-	@NotBlank(message = "承办人不能为空")
+	@NotBlank(message = "承办人不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String agent;
 
-	@NotBlank(message = "承办部门不能为空")
+	@NotBlank(message = "承办部门不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String agentDepartment;
 
-	@NotEmpty(message = "承办时间不能为空")
+	@NotEmpty(message = "承办时间不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	@Temporal(TemporalType.DATE)
 	private Date agentDate;
 
-	@NotNull(message = "案件来源不能为空")
+	@NotNull(message = "案件来源不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String source;
 
-	@NotBlank(message = "诉讼请求不能为空")
+	@NotBlank(message = "诉讼请求不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String request;
 
-	@NotNull(message = "起诉次数不能为空")
+	@NotNull(message = "起诉次数不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private Integer frequency;
 
-	@NotBlank(message = "立案案由不能为空")
+	@NotBlank(message = "立案案由不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String startCause;
 
-	@NotBlank(message = "立案案由描述不能为空")
+	@NotBlank(message = "立案案由描述不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String startDesc;
 
-	@NotEmpty(message = "结案时间不能为空")
+	@NotEmpty(message = "结案时间不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	@Temporal(TemporalType.DATE)
 	private Date endTime;
 
-	@NotBlank(message = "结案案由不能为空")
+	@NotBlank(message = "结案案由不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String endCause;
 
-	@NotBlank(message = "结案案由描述不能为空")
+	@NotBlank(message = "结案案由描述不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String endDesc;
 
-	@NotBlank(message = "受理费不能为空")
+	@NotBlank(message = "受理费不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String pay;
 
-	@NotBlank(message = "案件特征不能为空")
-	@Size(min=2, max=300)
+	@NotBlank(message = "案件特征不能为空！")
+	@Size(min=2, max=300,message = "案件特征长度必须是2到300之间！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String summary;
 
 	@Lob  // 大对象，映射 MySQL 的 Long Text 类型
 	@Basic(fetch=FetchType.LAZY) // 懒加载
-	@NotBlank(message = "案件描述内容不能为空")
-	@Size(min=2)
+	@NotBlank(message = "案件描述内容不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String content;
 

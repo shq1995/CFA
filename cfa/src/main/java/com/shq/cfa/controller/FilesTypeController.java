@@ -64,13 +64,13 @@ public class FilesTypeController {
             System.out.println(bindingResult.getFieldError().getDefaultMessage());
             Map<String,Object> map = new HashMap<>();
             map.put("type",filesType);
-            return new ModelAndView("filesType/add");
+            return new ModelAndView("filesType/add",map);
         }
         if ((filesTypeService.getFilesTypeByName(filesType.getName()))!=null){
             model.addAttribute("err", "案卷名称已存在！");
             Map<String,Object> map = new HashMap<>();
             map.put("type",filesType);
-            return new ModelAndView("filesType/add");
+            return new ModelAndView("filesType/add",map);
         }
         filesTypeService.saveFilesType(filesType);
         attrs.addAttribute("msg", "案卷类型添加成功！");
@@ -99,7 +99,7 @@ public class FilesTypeController {
             System.out.println(bindingResult.getFieldError().getDefaultMessage());
             Map<String,Object> map = new HashMap<>();
             map.put("type",filesType);
-            return new ModelAndView("filesType/edit");
+            return new ModelAndView("filesType/edit",map);
         }
         filesTypeService.saveFilesType(filesType);
         attrs.addAttribute("msg", "案卷类型修改成功！");

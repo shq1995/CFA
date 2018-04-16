@@ -68,14 +68,14 @@ public class KeywordController {
             model.addAttribute("types",filesTypes);
             Map<String,Object> map = new HashMap<>();
             map.put("filesKeyword",filesKeyword);
-            return new ModelAndView("keyword/add");
+            return new ModelAndView("keyword/add",map);
         }
         if ((filesKeywordService.findByTypeAndKeyword(filesKeyword.getType(),filesKeyword.getKeyword()))!=null){
             FilesType filesType = filesTypeService.getFilesTypeById(filesKeyword.getType());
             model.addAttribute("err", filesType.getName()+"里该关键字已存在！");
             Map<String,Object> map = new HashMap<>();
-            map.put("user",filesKeyword);
-            return new ModelAndView("keyword/add");
+            map.put("filesKeyword",filesKeyword);
+            return new ModelAndView("keyword/add",map);
         }
         System.out.println("保存的关键字信息："+filesKeyword);
         filesKeywordService.save(filesKeyword);

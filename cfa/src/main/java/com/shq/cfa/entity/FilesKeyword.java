@@ -30,12 +30,12 @@ public class FilesKeyword {
   @Column(nullable = false) // 映射为字段，值不能为空
   private Integer type;
 
-  @NotBlank(message = "关键字不能为空")
-  @Size(min=2, max=50)
-  @Column(nullable = false, length = 50) // 映射为字段，值不能为空
+  @NotBlank(message = "关键字不能为空!")
+  @Size(min=2, max=50,message = "关键字长度必须是2到50之间!")
+  @Column(nullable = false) // 映射为字段，值不能为空
   private String keyword;
 
-  @NotNull(message = "关键字权重不能为空")
+  @NotNull(message = "关键字权重不能为空！")
   @Column(nullable = false) // 映射为字段，值不能为空
   private Float weight;
 

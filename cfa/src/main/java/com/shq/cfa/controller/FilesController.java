@@ -10,8 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class FilesController {
@@ -48,26 +53,36 @@ public class FilesController {
     //来到案件添加页面
     @GetMapping("/file")
     public String toAddPage(Model model){
+        List<FilesType> filesTypes = filesTypeService.findAll();
+        model.addAttribute("types",filesTypes);
         return "file/add";
     }
 
     @GetMapping("/administrationadd")
     public String toAdministrationAddPage(Model model){
+        List<FilesType> filesTypes = filesTypeService.findAll();
+        model.addAttribute("types",filesTypes);
         return "file/administrationAdd";
     }
 
     @GetMapping("/securityadd")
     public String toSecurityAddPage(Model model){
+        List<FilesType> filesTypes = filesTypeService.findAll();
+        model.addAttribute("types",filesTypes);
         return "file/securityAdd";
     }
 
     @GetMapping("/civiladd")
     public String toCivilAddPage(Model model){
+        List<FilesType> filesTypes = filesTypeService.findAll();
+        model.addAttribute("types",filesTypes);
         return "file/civilAdd";
     }
 
     @GetMapping("/penaladd")
     public String toPenalAddPage(Model model){
+        List<FilesType> filesTypes = filesTypeService.findAll();
+        model.addAttribute("types",filesTypes);
         return "file/penalAdd";
     }
 
@@ -150,7 +165,18 @@ public class FilesController {
     }
     //案件添加
     @PostMapping("/file")
-    public String addFile(Model model,Files file, BindingResult bindingResult){
+    public String addFile(Model model, RedirectAttributes attrs, @Valid Files file, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("err", bindingResult.getFieldError().getDefaultMessage());
+            System.out.println(bindingResult.getFieldError().getDefaultMessage());
+            List<FilesType> filesTypes = filesTypeService.findAll();
+            model.addAttribute("types",filesTypes);
+            return ("file/add");
+        }
+        if ((filesService.findByTitle(file.getTitle()))!=null){
+            model.addAttribute("err", "该标题已存在！");
+            return  ("file/add");
+        }
         System.out.println("保存的案件信息："+file);
         //保存案件
         int index = 0;

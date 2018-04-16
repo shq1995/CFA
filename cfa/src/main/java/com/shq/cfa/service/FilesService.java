@@ -44,7 +44,7 @@ public interface FilesService {
 
 	List<Files> findByType(String type);
 	//按照标题模糊查询
-	List<Files> findByTitleLike(String title);
+	List<Files> findByTitle(String title);
 	//按照来源模糊查询
 	List<Files> findBySourceLike(String source);
 	//按照原告模糊查询

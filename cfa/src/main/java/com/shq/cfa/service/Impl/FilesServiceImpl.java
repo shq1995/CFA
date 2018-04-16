@@ -66,8 +66,8 @@ public class FilesServiceImpl implements FilesService {
 	}
 
 	@Override
-	public List<Files> findByTitleLike(String title) {
-		return filesRepository.findByTitleLike(title);
+	public List<Files> findByTitle(String title) {
+		return filesRepository.findByTitle(title);
 	}
 
 	@Override
