@@ -54,6 +54,8 @@
 				<div th:replace="commons/bar::#sidebar(activeUri='penal')"></div>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+					<p style="text-align: center; color: blue" th:text="${msg!=''}?${msg}"></p>
+					<p style="text-align: center" class="control-label text-danger" th:text="${err!=''}?${err}"></p>
 					<!--需要区分是员工修改还是添加；-->
 					<form th:action="@{/penalfile}" method="post">
 						<!--发送put请求修改员工数据-->
