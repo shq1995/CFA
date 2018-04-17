@@ -485,7 +485,35 @@ public class FilesController {
     @DeleteMapping("/file/{id}")
     public String deleteFile(RedirectAttributes attrs,@PathVariable("id") Integer id){
         filesService.removeFile(id);
-        attrs.addAttribute("msg", "关键字删除成功！");
+        attrs.addAttribute("msg", "案卷删除成功！");
         return "redirect:/files";
+    }
+
+    @DeleteMapping("/othersfile/{id}")
+    public String deleteOthersFile(RedirectAttributes attrs,@PathVariable("id") Integer id){
+        filesService.removeFile(id);
+        attrs.addAttribute("msg", "案卷删除成功！");
+        return "redirect:/others";
+    }
+
+    @DeleteMapping("/administrationfile/{id}")
+    public String deleteAdministrationFile(RedirectAttributes attrs,@PathVariable("id") Integer id){
+        filesService.removeFile(id);
+        attrs.addAttribute("msg", "案卷删除成功！");
+        return "redirect:/administration";
+    }
+
+    @DeleteMapping("/penalfile/{id}")
+    public String deletePenalFile(RedirectAttributes attrs,@PathVariable("id") Integer id){
+        filesService.removeFile(id);
+        attrs.addAttribute("msg", "案卷删除成功！");
+        return "redirect:/penal";
+    }
+
+    @DeleteMapping("/civilfile/{id}")
+    public String deleteCivilFile(RedirectAttributes attrs,@PathVariable("id") Integer id){
+        filesService.removeFile(id);
+        attrs.addAttribute("msg", "案卷删除成功！");
+        return "redirect:/civil";
     }
 }
