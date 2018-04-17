@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
@@ -30,12 +31,12 @@ public class Files implements Serializable {
 	private Integer id; // 案件的唯一标识
 
 	@NotBlank(message = "标题不能为空！")
-	@Size(min=2, max=50)
-	@Column(nullable = false, length = 50) // 映射为字段，值不能为空
+	@Column(nullable = false) // 映射为字段，值不能为空
 	private String title;
 
 	@NotBlank(message = "关键字不能为空！")
 	@Size(min=2,message = "关键字长度不能小于2！")
+	@Pattern(regexp = "^[\\u4e00-\\u9fa5]+|[\\u4e00-\\u9fa5]+[，][\\u4e00-\\u9fa5]+$", message = "关键字必须由中文逗号隔开！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String keyword;
 
@@ -71,7 +72,7 @@ public class Files implements Serializable {
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String agentDepartment;
 
-	@NotEmpty(message = "承办时间不能为空！")
+	@NotNull(message = "承办时间不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	@Temporal(TemporalType.DATE)
 	private Date agentDate;
@@ -96,7 +97,6 @@ public class Files implements Serializable {
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String startDesc;
 
-	@NotEmpty(message = "结案时间不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	@Temporal(TemporalType.DATE)
 	private Date endTime;
@@ -118,8 +118,6 @@ public class Files implements Serializable {
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String summary;
 
-	@Lob  // 大对象，映射 MySQL 的 Long Text 类型
-	@Basic(fetch=FetchType.LAZY) // 懒加载
 	@NotBlank(message = "案件描述内容不能为空！")
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String content;

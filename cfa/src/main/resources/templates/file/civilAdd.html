@@ -65,100 +65,100 @@
 						<input type="hidden" name="id" th:if="${file!=null}" th:value="${file.id}">
 						<div class="form-group">
 							<div class="row">
-							<div class="form-group col-md-12">
-								<label>标题</label>
-								<input name="title" type="text" class="form-control" placeholder="请输入案件标题" th:value="${file!=null}?${file.title}">
-							</div>
-							</div>
-							<div class="row">
-							<div class="form-group col-md-12">
-								<label>关键字</label>
-								<input name="keyword" type="text" class="form-control" placeholder="请输入案件关键字" th:value="${file!=null}?${file.keyword}">
-							</div>
+								<div class="form-group col-md-12">
+									<label>*标题</label>
+									<input name="title" type="text" class="form-control" placeholder="请输入案件标题" th:value="${file!=null}?${file.title}">
+								</div>
 							</div>
 							<div class="row">
-							<div class="form-group col-md-4">
-								<label>案号</label>
-								<input name="number" type="text" class="form-control" placeholder="请输入案件案号" th:value="${file!=null}?${file.number}">
-							</div>
-							<div class="form-group col-md-4">
-								<label>收诉状日期</label>
-								<input name="putDate" type="date" class="form-control" placeholder="请输入案件收诉状日期" th:value="${file!=null}?${#dates.format(file.putDate, 'yyyy-MM-dd')}">
-							</div>
-							<div class="form-group col-md-4">
-								<label>负责人</label>
-								<input name="principal" type="text" class="form-control" placeholder="请输入案件负责人" th:value="${file!=null}?${file.principal}">
-							</div>
+								<div class="form-group col-md-12">
+									<label>*关键字</label>
+									<input name="keyword" type="text" class="form-control" placeholder="请输入案件关键字" th:value="${file!=null}?${file.keyword}">
+								</div>
 							</div>
 							<div class="row">
-							<div class="form-group col-md-4">
-								<label>原告</label>
-								<input name="accuser" type="text" class="form-control" placeholder="请输入案件原告" th:value="${file!=null}?${file.accuser}">
-							</div>
-							<div class="form-group col-md-4">
-								<label>被告</label>
-								<input name="defendant" type="text" class="form-control" placeholder="请输入案件被告" th:value="${file!=null}?${file.defendant}">
-							</div>
-							<div class="form-group col-md-4">
-								<label>承办人</label>
-								<input name="agent" type="text" class="form-control" placeholder="请输入案件承办人" th:value="${file!=null}?${file.agent}">
-							</div>
+								<div class="form-group col-md-4">
+									<label>*案号</label>
+									<input name="number" type="text" class="form-control" placeholder="请输入案件案号" th:value="${file!=null}?${file.number}">
+								</div>
+								<div class="form-group col-md-4">
+									<label>*收诉状日期</label>
+									<input name="putDate" type="date" class="form-control" placeholder="请输入案件收诉状日期" th:value="${file!=null}?${#dates.format(file.putDate, 'yyyy-MM-dd')}">
+								</div>
+								<div class="form-group col-md-4">
+									<label>*负责人</label>
+									<input name="principal" type="text" class="form-control" placeholder="请输入案件负责人" th:value="${file!=null}?${file.principal}">
+								</div>
 							</div>
 							<div class="row">
-							<div class="form-group col-md-4">
-								<label>承办部门</label>
-								<input name="agentDepartment" type="text" class="form-control" placeholder="请输入案件承办部门" th:value="${file!=null}?${file.agentDepartment}">
+								<div class="form-group col-md-4">
+									<label>*原告</label>
+									<input name="accuser" type="text" class="form-control" placeholder="请输入案件原告" th:value="${file!=null}?${file.accuser}">
+								</div>
+								<div class="form-group col-md-4">
+									<label>*被告</label>
+									<input name="defendant" type="text" class="form-control" placeholder="请输入案件被告" th:value="${file!=null}?${file.defendant}">
+								</div>
+								<div class="form-group col-md-4">
+									<label>*承办人</label>
+									<input name="agent" type="text" class="form-control" placeholder="请输入案件承办人" th:value="${file!=null}?${file.agent}">
+								</div>
 							</div>
-							<div class="form-group col-md-4">
-								<label>承办时间</label>
-								<input name="agentDate" type="date" class="form-control" placeholder="请输入案件承办时间" th:value="${file!=null}?${#dates.format(file.agentDate, 'yyyy-MM-dd')}">
-							</div>
-							<div class="form-group col-md-4">
-								<label>案件来源</label>
-								<input name="source" type="text" class="form-control" placeholder="请输入案件案件来源" th:value="${file!=null}?${file.source}">
-							</div>
+							<div class="row">
+								<div class="form-group col-md-4">
+									<label>*承办部门</label>
+									<input name="agentDepartment" type="text" class="form-control" placeholder="请输入案件承办部门" th:value="${file!=null}?${file.agentDepartment}">
+								</div>
+								<div class="form-group col-md-4">
+									<label>*承办时间</label>
+									<input name="agentDate" type="date" class="form-control" placeholder="请输入案件承办时间" th:value="${file!=null}?${#dates.format(file.agentDate, 'yyyy-MM-dd')}">
+								</div>
+								<div class="form-group col-md-4">
+									<label>*案件来源</label>
+									<input name="source" type="text" class="form-control" placeholder="请输入案件案件来源" th:value="${file!=null}?${file.source}">
+								</div>
 							</div>
 							<div class="form-group">
-								<label>诉讼请求</label>
+								<label>*诉讼请求</label>
 								<input name="request" type="text" class="form-control" placeholder="请输入案件诉讼请求" th:value="${file!=null}?${file.request}">
 							</div>
 							<div class="form-group">
-								<label>立案案由</label>
+								<label>*立案案由</label>
 								<input name="startCause" type="text" class="form-control" placeholder="请输入案件立案案由" th:value="${file!=null}?${file.startCause}">
 							</div>
 							<div class="form-group">
-								<label>立案案由描述</label>
+								<label>*立案案由描述</label>
 								<input name="startDesc" type="text" class="form-control" placeholder="请输入案件立案案由描述" th:value="${file!=null}?${file.startDesc}">
 							</div>
 							<div class="form-group">
-								<label>结案案由</label>
-								<input name="endCase" type="text" class="form-control" placeholder="请输入案件结案案由" th:value="${file!=null}?${file.endCase}">
+								<label>*结案案由</label>
+								<input name="endCause" type="text" class="form-control" placeholder="请输入案件结案案由" th:value="${file!=null}?${file.endCause}">
 							</div>
 							<div class="form-group">
-								<label>结案案由描述</label>
+								<label>*结案案由描述</label>
 								<input name="endDesc" type="text" class="form-control" placeholder="请输入案件结案案由描述" th:value="${file!=null}?${file.endDesc}">
 							</div>
 							<div class="row">
 								<div class="form-group col-md-4">
-									<label>起诉次数</label>
+									<label>*起诉次数</label>
 									<input name="frequency" type="text" class="form-control" placeholder="请输入案件起诉次数" th:value="${file!=null}?${file.frequency}">
 								</div>
-							<div class="form-group col-md-4">
-								<label>结案时间</label>
-								<input name="endTime" type="date" class="form-control" placeholder="请输入案件结案时间" th:value="${file!=null}?${#dates.format(file.endTime, 'yyyy-MM-dd')}">
-							</div>
-							<div class="form-group col-md-4">
-								<label>受理费</label>
-								<input name="pay" type="text" class="form-control" placeholder="请输入案件受理费" th:value="${file!=null}?${file.pay}">
-							</div>
+								<div class="form-group col-md-4">
+									<label>*结案时间</label>
+									<input name="endTime" type="date" class="form-control" placeholder="请输入案件结案时间" th:value="${file!=null}?${#dates.format(file.endTime, 'yyyy-MM-dd')}">
+								</div>
+								<div class="form-group col-md-4">
+									<label>*受理费</label>
+									<input name="pay" type="text" class="form-control" placeholder="请输入案件受理费" th:value="${file!=null}?${file.pay}">
+								</div>
 							</div>
 							<div class="form-group">
-								<label>案件特征</label>
+								<label>*案件特征</label>
 								<input name="summary" type="text" class="form-control" placeholder="请输入案件案件特征" th:value="${file!=null}?${file.summary}">
 							</div>
 							<div class="form-group">
-								<label>案件描述</label>
-								<textarea name="content" class="form-control" rows="3" cols="20" placeholder="请输入案件案件描述" th:value="${file!=null}?${file.content}"></textarea>
+								<label>*案件描述</label>
+								<textarea name="content" class="form-control" rows="3" cols="20" placeholder="请输入案件案件描述" th:text="${file!=null}?${file.content}"></textarea>
 							</div>
 				<!--		<div class="form-group">
 							<label>department</label>

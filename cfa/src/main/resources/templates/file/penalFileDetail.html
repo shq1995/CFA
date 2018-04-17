@@ -58,14 +58,18 @@
 						<h1 class="text-primary">详情</h1>
 						<table class="table table-bordered">
 							<tr>
-								<td style="background-color:lavender;">ID</td>
+								<td style="background-color:lavender;width: 205px">ID</td>
 								<td th:text="${file.id}"></td>
 								<td style="background-color:lavender;">标题</td>
 								<td th:text="${file.title}"></td>
 							</tr>
 							<tr>
 								<td style="background-color:lavender;">关键字</td>
-								<td th:text="${file.keyword}"></td>
+								<td colspan="3" th:text="${file.keyword}"></td>
+							</tr>
+							<tr>
+								<td style="background-color:lavender;">案件类型</td>
+								<td th:text="${type.name}" th:if="${type.id == file.type}" th:each="type:${types}"></td>
 								<td style="background-color:lavender;">案号</td>
 								<td th:text="${file.number}"></td>
 							</tr>
@@ -101,27 +105,33 @@
 							</tr>
 							<tr>
 								<td style="background-color:lavender;">立案案由</td>
-								<td th:text="${file.startCause}"></td>
+								<td colspan="3" th:text="${file.startCause}"></td>
+							</tr>
+							<tr>
 								<td style="background-color:lavender;">立案案由描述</td>
-								<td th:text="${file.startDesc}"></td>
+								<td colspan="3" th:text="${file.startDesc}"></td>
 							</tr>
 							<tr>
 								<td style="background-color:lavender;">结案案由</td>
-								<td th:text="${file.endCase}"></td>
+								<td colspan="3" th:text="${file.endCause}"></td>
+							</tr>
+							<tr>
 								<td style="background-color:lavender;">结案案由描述</td>
-								<td th:text="${file.endDesc}"></td>
+								<td colspan="3" th:text="${file.endDesc}"></td>
+							</tr>
+							<tr>
+								<td style="background-color:lavender;">案件特征</td>
+								<td colspan="3" th:text="${file.summary}"></td>
+							</tr>
+							<tr>
+								<td style="background-color:lavender;">案件描述</td>
+								<td colspan="3" th:text="${file.content}"></td>
 							</tr>
 							<tr>
 								<td style="background-color:lavender;">结案时间</td>
 								<td th:text="${#dates.format(file.endTime, 'yyyy-MM-dd HH:mm')}"></td>
 								<td style="background-color:lavender;">受理费</td>
 								<td th:text="${file.pay}"></td>
-							</tr>
-							<tr>
-								<td style="background-color:lavender;">案件特征</td>
-								<td th:text="${file.summary}"></td>
-								<td style="background-color:lavender;">案件描述</td>
-								<td th:text="${file.content}"></td>
 							</tr>
 							<tr>
 								<td style="background-color:lavender;">创建时间</td>

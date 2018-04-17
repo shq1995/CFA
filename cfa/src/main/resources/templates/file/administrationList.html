@@ -90,13 +90,13 @@
 							<tbody>
 								<tr th:each="file:${datas}">
 									<td th:text="${file.id}"></td>
-									<td ><a  class="rb-title" th:href="@{/administrationfiledetail/}+${file.id}" th:text="${file.title}"></a></td>
+									<td ><a  class="rb-title" th:href="@{/civilfiledetail/}+${file.id}" th:text="${file.title}"></a></td>
 									<td th:text="${file.number}"></td>
-									<td th:text="${file.type}"></td>
+									<td th:text="${type.name}" th:if="${type.id == file.type}" th:each="type:${types}"></td>
 									<td th:text="${file.principal}"></td>
 									<td th:text="${file.accuser}"></td>
-									<td>[[${user.defendant}]]</td>
-									<td th:text="${user.agentDepartment}"></td>
+									<td th:text="${file.defendant}"></td>
+									<td th:text="${file.agentDepartment}"></td>
 									<td>
 										<a class="btn btn-sm btn-primary" th:href="@{/administrationfile/}+${file.id}">编辑</a>
 										<button th:attr="del_uri=@{/file/}+${file.id}" class="btn btn-sm btn-danger deleteBtn">删除</button>

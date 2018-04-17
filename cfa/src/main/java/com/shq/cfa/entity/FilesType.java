@@ -26,11 +26,11 @@ public class FilesType {
   private Integer id; // 案件类型的唯一标识
 
   @NotEmpty(message = "分类名称不能为空")
-  @Column(nullable = false, length = 50) // 映射为字段，值不能为空
+  @Column(nullable = false) // 映射为字段，值不能为空
   private String name;
 
   @NotEmpty(message = "说明不能为空")
-  @Column(nullable = false, length = 50) // 映射为字段，值不能为空
+  @Column(nullable = false) // 映射为字段，值不能为空
   private String state;
 
   @NotEmpty(message = "简称不能为空")

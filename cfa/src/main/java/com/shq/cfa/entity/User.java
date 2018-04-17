@@ -36,13 +36,13 @@ public class User implements Serializable {
   private String department;
 
   @NotNull(message = "性别不能为空!")
-  @Column(nullable = false, length = 1)
+  @Column(nullable = false)
   private Integer sex;
 
   @Column(nullable = true)
   @Temporal(TemporalType.DATE)
   private Date birthday;
-
+@Size(min = 11, max = 11,message="请输入11位的手机号码!")
   @Column(nullable = true, length = 11)
   private String phone;
 
@@ -56,29 +56,25 @@ public class User implements Serializable {
   private String politics;
 
   @NotBlank(message = "姓名不能为空!")
-  @Length(min = 2, max = 20, message="长度不能小于2位大于20位!")
-  @Column(nullable = false, length = 20)
+  @Column(nullable = false)
   private String name;
 
   @NotBlank(message = "邮箱不能为空!")
-  @Size(max = 50)
   @Email(message = "邮箱格式不对!")
-  @Column(nullable = false, length = 50)
+  @Column(nullable = false)
   private String email;
 
   @NotBlank(message = "账号不能为空!")
-  @Length(min = 2, max = 20, message="长度不能小于5位大于20位!")
-  @Column(nullable = false, length = 20, unique = true)
+  @Length(min = 2, max = 20, message="账号长度不能小于5位大于20位!")
+  @Column(nullable = false, unique = true)
   private String username; // 用户账号，用户登录时的唯一标识
 
   @NotBlank(message = "密码不能为空!")
-  @Size(max = 100)
   @Length(min = 2, max = 20, message="密码不能小于6位大于15位!")
   @Pattern(regexp = "^[\\da-zA-Z]*\\d+[a-zA-Z]+[\\da-zA-Z]*$", message = "密码必须由字母与数字组成！")
   @Column(nullable = false)
   private String password; // 登录时密码
 
-  @Column(length = 200)
   private String avatar; // 头像图片地址
 
   @Column(nullable = true)
