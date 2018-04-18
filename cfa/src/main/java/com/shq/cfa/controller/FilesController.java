@@ -235,6 +235,14 @@ public class FilesController {
                 index += 1;
             }
         }
+        List<FilesKeyword> keywords = filesKeywordService.findByType(index);
+        for (FilesKeyword keyword: keywords){
+            boolean include = content.contains(keyword.getKeyword());
+            if (include){
+                keyword.setWeight(keyword.getWeight()+0.01f);
+                filesKeywordService.save(keyword);
+            }
+        }
         if (file.getKeyword()!=null&&file.getKeyword()!="") {
             String[] fileKeyword = file.getKeyword().split("，");
             FilesKeyword filesKeyword = new FilesKeyword();
@@ -243,14 +251,6 @@ public class FilesController {
                 filesKeyword.setKeyword(fileKeyword[i]);
                 filesKeyword.setWeight(1.0f);
                 filesKeywordService.save(filesKeyword);
-            }
-        }
-        List<FilesKeyword> keywords = filesKeywordService.findByType(index);
-        for (FilesKeyword keyword: keywords){
-            boolean include = content.contains(keyword.getKeyword());
-            if (include){
-                keyword.setWeight(keyword.getWeight()+0.01f);
-                filesKeywordService.save(keyword);
             }
         }
         file.setType(index);
