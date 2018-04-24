@@ -57,6 +57,8 @@ public class FilesController {
 
     @GetMapping("/othersadd")
     public String toOthersAddPage(Model model){
+        List<FilesType> filesTypes = filesTypeService.getFilesTypeByBasics(2);
+        model.addAttribute("types",filesTypes);
         return "file/othersAdd";
     }
 
@@ -112,8 +114,8 @@ public class FilesController {
     public String toPageOthers(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
                               @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
                               Model model,@ModelAttribute("msg") String message){
-        //List<FilesType> filesTypes = filesTypeService.getFilesTypeByBasics(2);
-        List<FilesType> filesTypes = filesTypeService.findAll();
+        List<FilesType> filesTypes = filesTypeService.getFilesTypeByBasics(2);
+        //List<FilesType> filesTypes = filesTypeService.findAll();
         Page<Files> files = filesService.findBasicsCriteria(pageIndex,pageSize,2);
         model.addAttribute("datas",files);
         model.addAttribute("types",filesTypes);
