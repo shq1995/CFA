@@ -154,7 +154,7 @@ public class FilesServiceImpl implements FilesService {
 			public Predicate toPredicate(Root<Files> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 				List<Predicate> list = new ArrayList<Predicate>();
 				if(null!=basics&&!"".equals(basics)){
-					list.add(criteriaBuilder.equal(root.get("type").as(String.class), basics));
+					list.add(criteriaBuilder.equal(root.get("basics").as(String.class), basics));
 				}
 				Predicate[] p = new Predicate[list.size()];
 				return criteriaBuilder.and(list.toArray(p));

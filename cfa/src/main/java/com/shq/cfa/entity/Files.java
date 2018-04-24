@@ -34,9 +34,8 @@ public class Files implements Serializable {
 	@Column(nullable = false) // 映射为字段，值不能为空
 	private String title;
 
-	@Size(min=2,message = "关键字长度不能小于2！")
-	@Pattern(regexp = "^[ ]|[\\u4e00-\\u9fa5]+|[\\u4e00-\\u9fa5]+[，][\\u4e00-\\u9fa5]+$", message = "关键字必须由中文逗号隔开！")
-	@Column(nullable = true) // 映射为字段，值不能为空
+	@Pattern(regexp = "^[ ]|[\\u4e00-\\u9fa5]*|[\\u4e00-\\u9fa5]+[，][\\u4e00-\\u9fa5]+$", message = "关键字必须由中文逗号隔开！")
+	@Column(nullable = false) // 映射为字段，值不能为空
 	private String keyword;
 
 	@Column
