@@ -67,9 +67,15 @@
 						<input type="hidden" name="id" th:if="${file!=null}" th:value="${file.id}">
 						<div class="form-group">
 							<div class="row">
-								<div class="form-group col-md-12">
-									<label>*标题</label>
+								<div class="form-group col-md-6">
+									<label>标题</label>
 									<input name="title" type="text" class="form-control" placeholder="请输入案件标题" th:value="${file!=null}?${file.title}">
+								</div>
+								<div class="form-group col-md-6">
+									<label>案卷类型</label>
+									<select class="form-control" name="type">
+										<option th:selected="${file!=null}?${type.id == file.type}" th:value="${type.id}" th:each="type:${types}" th:text="${type.name}">1</option>
+									</select>
 								</div>
 							</div>
 							<div class="row">
