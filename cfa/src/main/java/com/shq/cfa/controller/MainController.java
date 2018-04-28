@@ -2,9 +2,9 @@ package com.shq.cfa.controller;
 
 import com.shq.cfa.component.MyLocaleResolver;
 import com.shq.cfa.entity.Authority;
+import com.shq.cfa.entity.FilesType;
 import com.shq.cfa.entity.User;
-import com.shq.cfa.service.AuthorityService;
-import com.shq.cfa.service.UserService;
+import com.shq.cfa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.LocaleResolver;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @author shuihuaqi
@@ -30,6 +31,12 @@ public class MainController {
 	private UserService userService;
 	@Autowired
 	private AuthorityService authorityService;
+	@Autowired
+	private FilesTypeService filesTypeService;
+	@Autowired
+	private FilesService filesService;
+	@Autowired
+	private FilesKeywordService filesKeywordService;
 
 	@GetMapping("/")
 	public String root() {
@@ -51,6 +58,11 @@ public class MainController {
 	 */
 	@GetMapping("/main")
 	public String main() {
+		List<FilesType> filesTypes = filesTypeService.findAll();
+
+		for (FilesType filesType : filesTypes){
+
+		}
 		return "main";
 	}
 
