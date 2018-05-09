@@ -42,7 +42,7 @@ public interface FilesService {
 
 	 List<Files> listFiles();
 
-	List<Files> findByType(String type);
+	List<Files> findByType(Integer type);
 	//按照标题模糊查询
 	List<Files> findByTitle(String title);
 	//按照来源模糊查询

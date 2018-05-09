@@ -61,7 +61,7 @@ public class FilesServiceImpl implements FilesService {
 	}
 
 	@Override
-	public List<Files> findByType(String type) {
+	public List<Files> findByType(Integer type) {
 		return filesRepository.findByType(type);
 	}
 

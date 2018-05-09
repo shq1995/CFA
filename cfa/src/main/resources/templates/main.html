@@ -58,7 +58,7 @@
 							<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
 						</div>
 					</div>
-					<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+					<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom" style="height: 25px;">
 						<h5 class="h2">案卷分类统计</h5>
 						<!--<div class="btn-toolbar mb-2 mb-md-0">
 							<div class="btn-group mr-2">
@@ -90,10 +90,16 @@
 		<script type="text/javascript" src="echarts.min.js"  th:src="@{/asserts/js/echarts.min.js}"></script>
 		<!-- Icons -->
 		<script type="text/javascript" src="asserts/js/feather.min.js" th:src="@{/asserts/js/feather.min.js}"></script>
-		<script type="text/javascript">
+		<script type="text/javascript" th:inline="text">
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(document.getElementById('Chart1'));
+            var xArray = [# th:utext="${xarray}"/];
+
+
             option = {
+                title: {
+                    text: '案卷数量'
+                },
                 color: ['#3398DB'],
                 tooltip : {
                     trigger: 'axis',
@@ -110,7 +116,7 @@
                 xAxis : [
                     {
                         type : 'category',
-                        data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        data : xArray,
                         axisTick: {
                             alignWithLabel: true
                         }
@@ -126,39 +132,44 @@
                         name:'直接访问',
                         type:'bar',
                         barWidth: '60%',
-                        data:[10, 52, 200, 334, 390, 330, 220]
+                        data:[[${yarray}]]
                     }
                 ]
             };
             // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);
 		</script>
-		<script type="text/javascript">
+		<script type="text/javascript" th:inline="text">
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(document.getElementById('Chart2'));
+            var xArray = [# th:utext="${xarray}"/];
             option = {
+                title: {
+                    text: '案卷增长趋势'
+                },
                 xAxis: {
                     type: 'category',
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                    data: xArray
                 },
                 yAxis: {
                     type: 'value'
                 },
                 series: [{
-                    data: [820, 932, 901, 934, 1290, 1330, 1320],
+                    data: [[${yarray}]],
                     type: 'line'
                 }]
             };
             // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);
 		</script>
-		<script type="text/javascript">
+		<script type="text/javascript" th:inline="text">
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(document.getElementById('Chart3'));
+            var bArray = [# th:utext="${barray}"/];
+            var xArray = [# th:utext="${xarray}"/];
             option = {
                 title : {
-                    text: '某站点用户访问来源',
-                    subtext: '纯属虚构',
+                    text: '案卷关键字占比',
                     x:'center'
                 },
                 tooltip : {
@@ -168,7 +179,7 @@
                 legend: {
                     orient: 'vertical',
                     left: 'left',
-                    data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+                    data: xArray
                 },
                 series : [
                     {
@@ -176,13 +187,7 @@
                         type: 'pie',
                         radius : '55%',
                         center: ['50%', '60%'],
-                        data:[
-                            {value:335, name:'直接访问'},
-                            {value:310, name:'邮件营销'},
-                            {value:234, name:'联盟广告'},
-                            {value:135, name:'视频广告'},
-                            {value:1548, name:'搜索引擎'}
-                        ],
+                        data:bArray,
                         itemStyle: {
                             emphasis: {
                                 shadowBlur: 10,
@@ -196,22 +201,14 @@
             // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);
 		</script>
-		<script type="text/javascript">
+		<script type="text/javascript" th:inline="text">
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(document.getElementById('Chart4'));
+            var zArray = [# th:utext="${zarray}"/];
+            var xArray = [# th:utext="${xarray}"/];
             option = {
                 title: {
-                    text: '世界人口总量',
-                    subtext: '数据来自网络'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'shadow'
-                    }
-                },
-                legend: {
-                    data: ['2011年', '2012年']
+                    text: '案卷关键字数量'
                 },
                 grid: {
                     left: '3%',
@@ -225,18 +222,12 @@
                 },
                 yAxis: {
                     type: 'category',
-                    data: ['巴西','印尼','美国','印度','中国','世界人口(万)']
+                    data: xArray
                 },
                 series: [
                     {
-                        name: '2011年',
                         type: 'bar',
-                        data: [18203, 23489, 29034, 104970, 131744, 630230]
-                    },
-                    {
-                        name: '2012年',
-                        type: 'bar',
-                        data: [19325, 23438, 31000, 121594, 134141, 681807]
+                        data: zArray
                     }
                 ]
             };

@@ -17,7 +17,7 @@ import java.util.List;
  **/
 public interface FilesRepository extends JpaRepository<Files, Integer>,JpaSpecificationExecutor<Files> {
  //按照类型查询
- List<Files> findByType(String type);
+ List<Files> findByType(Integer type);
 
  List<Files> findByTitle(String title);
  //按照来源模糊查询

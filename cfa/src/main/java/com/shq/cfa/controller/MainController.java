@@ -1,9 +1,9 @@
 package com.shq.cfa.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.shq.cfa.component.MyLocaleResolver;
-import com.shq.cfa.entity.Authority;
-import com.shq.cfa.entity.FilesType;
-import com.shq.cfa.entity.User;
+import com.shq.cfa.entity.*;
 import com.shq.cfa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author shuihuaqi
@@ -57,13 +60,29 @@ public class MainController {
 	 * @return
 	 */
 	@GetMapping("/main")
-	public String main() {
+	public ModelAndView main(Model model) {
 		List<FilesType> filesTypes = filesTypeService.findAll();
-
+		Map<String,Object> map = new HashMap<>();
+		JSONArray xarray = new JSONArray();
+		JSONArray yarray = new JSONArray();
+		JSONArray zarray = new JSONArray();
+		JSONArray barray = new JSONArray();
 		for (FilesType filesType : filesTypes){
-
+			List<Files> files = filesService.findByType(filesType.getId());
+			List<FilesKeyword> filesKeywords = filesKeywordService.findByType(filesType.getId());
+			xarray.add(filesType.getName());
+			yarray.add(files.size());
+			zarray.add(filesKeywords.size());
+			JSONObject json = new JSONObject();
+			json.put("value",filesKeywords.size());
+			json.put("name",filesType.getName());
+			barray.add(json);
 		}
-		return "main";
+		map.put("xarray", xarray.toJSONString());
+		map.put("yarray", yarray.toJSONString());
+		map.put("zarray", zarray.toJSONString());
+		map.put("barray", barray.toJSONString());
+		return new ModelAndView("main",map);
 	}
 
 	@PostMapping("/login")
