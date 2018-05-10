@@ -22,6 +22,6 @@ public interface FilesKeywordService {
 
   Page<FilesKeyword> findKeywordNoCriteria(Integer page,Integer size);
 
-  Page<FilesKeyword> findKeywordCriteria(Integer page,Integer size,String type,String keyword);
+  Page<FilesKeyword> findKeywordCriteria(Integer page,Integer size,Integer type,String keyword);
 
 }

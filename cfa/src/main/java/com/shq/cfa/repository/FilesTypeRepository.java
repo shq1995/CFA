@@ -8,6 +8,6 @@ import java.util.List;
 
 
 public interface FilesTypeRepository extends JpaRepository<FilesType, Integer>,JpaSpecificationExecutor<FilesType> {
-  FilesType findByName(String name);
+  FilesType findByNameLike(String name);
   List<FilesType> findByBasics(Integer basics);
 }

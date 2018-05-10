@@ -71,14 +71,14 @@ public class FilesKeywordServiceImpl implements FilesKeywordService{
   }
 
   @Override
-  public Page<FilesKeyword> findKeywordCriteria(Integer page, Integer size, final String type,String keyword) {
+  public Page<FilesKeyword> findKeywordCriteria(Integer page, Integer size, final Integer type,String keyword) {
     Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "id");
     Page<FilesKeyword> userPage = repository.findAll(new Specification<FilesKeyword>(){
       @Override
       public Predicate toPredicate(Root<FilesKeyword> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         List<Predicate> list = new ArrayList<Predicate>();
         if(null!=type&&!"".equals(type)){
-          list.add(criteriaBuilder.like(root.get("type").as(String.class),  "%"+type+"%"));
+          list.add(criteriaBuilder.equal(root.get("type").as(String.class), type));
         }
         if(null!=keyword&&!"".equals(keyword)){
           list.add(criteriaBuilder.like(root.get("keyword").as(String.class), "%"+keyword+"%"));

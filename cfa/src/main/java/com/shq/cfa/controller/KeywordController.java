@@ -43,12 +43,14 @@ public class KeywordController {
     @GetMapping("/findKeywordQuery")
     public String  listKeywordQuery(@RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
                                  @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
-                                    @RequestParam(value="type",required=false,defaultValue="") String type,
+                                    @RequestParam(value="type",required=false,defaultValue="") Integer type,
                                     @RequestParam(value="keyword",required=false,defaultValue="") String keyword,
                                  Model model){
         Page<FilesKeyword> keywords = filesKeywordService.findKeywordCriteria(pageIndex,pageSize,type,keyword);
+        List<FilesType> filesTypes = filesTypeService.findAll();
         //放在请求域中
         model.addAttribute("datas",keywords);
+        model.addAttribute("types",filesTypes);
         return "keyword/list";
     }
 

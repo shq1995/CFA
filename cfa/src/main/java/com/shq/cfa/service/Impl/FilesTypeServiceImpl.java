@@ -36,6 +36,11 @@ public class FilesTypeServiceImpl implements FilesTypeService {
 		filesTypeRepository.delete(id);
 	}
 
+	@Override
+	public FilesType findByName(String name) {
+		return filesTypeRepository.findByNameLike(name);
+	}
+
 	@Transactional
 	@Override
 	public FilesType updateFilesType(FilesType filesType) {
@@ -44,7 +49,7 @@ public class FilesTypeServiceImpl implements FilesTypeService {
 
 	@Override
 	public FilesType getFilesTypeByName(String name) {
-		return filesTypeRepository.findByName(name);
+		return filesTypeRepository.findByNameLike(name);
 	}
 
 	@Override

@@ -11,7 +11,7 @@ public interface FilesTypeService {
 	FilesType saveFilesType(FilesType filesType);
 
 	void removeFilesTppe(Integer id);
-
+	FilesType findByName(String name);
 	FilesType updateFilesType(FilesType filesType);
 	FilesType getFilesTypeByName(String name);
 	List<FilesType> getFilesTypeByBasics(Integer basics);
