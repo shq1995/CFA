@@ -174,7 +174,7 @@
 								<option th:selected="${user!=null}?${authority.id == user.authority.id}" th:value="${authority.id}" th:each="dept:${authoritys}" th:text="${authority.name}">1</option>
 							</select>
 						</div>-->
-						<button type="submit" class="btn btn-primary" th:text="${user!=null}?'修改':'添加'">添加</button>
+						<button type="submit" class="btn btn-primary" th:text="'修改'">修改</button>
 						</div>
 					</form>
 				</main>
