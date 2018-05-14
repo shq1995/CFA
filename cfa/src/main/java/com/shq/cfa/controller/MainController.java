@@ -89,9 +89,9 @@ public class MainController {
 	public String auth(Model model, HttpSession session, @RequestParam String username, @RequestParam String password) {
 		User user = userService.getUserByName(username);
 		//System.out.println(user.getAuth());
-		Authority authority = authorityService.getAuthorityById(user.getAuth());
 		//System.out.println(authority.getName());
 		if (user != null) {
+			Authority authority = authorityService.getAuthorityById(user.getAuth());
 			if (user.getPassword().equals(password)) {
 				session.setAttribute("loginUser",user.getName());
 				session.setAttribute("loginUserId",user.getId());
