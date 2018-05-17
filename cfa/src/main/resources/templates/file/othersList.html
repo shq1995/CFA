@@ -63,8 +63,8 @@
 							<form th:action="@{/civilQuery}"  th:method="get">
 								<div class="form-group">
 									<div style="display: flex">
-										<input type="text" style="width: 150px;height: 32px;" class="form-control" name="title" placeholder="请输入案件标题" />&nbsp;&nbsp;
-										<input type="text" style="width: 170px;height: 32px;" class="form-control" name="number" placeholder="请输入案件案号" />&nbsp;&nbsp;
+										<input type="text" style="width: 150px;height: 32px;" class="form-control" name="title" placeholder="请输入案卷标题" />&nbsp;&nbsp;
+										<input type="text" style="width: 170px;height: 32px;" class="form-control" name="number" placeholder="请输入案卷案号" />&nbsp;&nbsp;
 										<select class="form-control" name="type" style="width: 175px;height: 32px;font-size: 9px;">
 											<option></option>
 											<option th:selected="${file!=null}?${type.id == file.type}" th:value="${type.id}" th:each="type:${types}" th:text="${type.name}">1</option>
@@ -83,7 +83,7 @@
 									<th>ID</th>
 									<th>标题</th>
 									<th>案号</th>
-									<th>案件类型</th>
+									<th>案卷类型</th>
 									<th>负责人</th>
 									<th>原告</th>
 									<th>被告</th>

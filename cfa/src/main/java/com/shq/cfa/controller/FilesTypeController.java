@@ -72,9 +72,7 @@ public class FilesTypeController {
             map.put("type",filesType);
             return new ModelAndView("filesType/add",map);
         }
-        if (filesType.getId()>4){
             filesType.setBasics(2);
-        }
         filesTypeService.saveFilesType(filesType);
         attrs.addAttribute("msg", "案卷类型添加成功！");
         return new ModelAndView ("redirect:/filesTypes");
@@ -104,6 +102,7 @@ public class FilesTypeController {
             map.put("type",filesType);
             return new ModelAndView("filesType/edit",map);
         }
+        filesType.setBasics(2);
         filesTypeService.saveFilesType(filesType);
         attrs.addAttribute("msg", "案卷类型修改成功！");
         return new ModelAndView ("redirect:/filesTypes");
