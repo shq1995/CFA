@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.shq.cfa.component.MyLocaleResolver;
 import com.shq.cfa.entity.*;
 import com.shq.cfa.service.*;
+import jdk.nashorn.internal.runtime.GlobalConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
@@ -51,7 +53,9 @@ public class MainController {
 	 * @return
 	 */
 	@GetMapping("/login")
-	public String login() {
+	public String login(HttpServletRequest request, HttpSession session) {
+		Object user = request.getSession().getAttribute("loginUser");
+		session.removeAttribute("loginUser");
 		return "login";
 	}
 
