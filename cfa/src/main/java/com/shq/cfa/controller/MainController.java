@@ -103,7 +103,9 @@ public class MainController {
 				return "redirect:/main";
 			}
 		}
-		return "redirect:/login-error";
+		model.addAttribute("loginError", true);
+		model.addAttribute("errorMsg", "登陆失败，账号或者密码错误！");
+		return "login";
 	}
 
 	@GetMapping("/login-error")

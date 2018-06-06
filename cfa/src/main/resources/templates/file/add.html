@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>案卷添加</title>
+		<title>案卷分析</title>
 		<link rel="icon" type="image/x-icon" th:href="@{/asserts/img/document.png}">
 		<!-- Bootstrap core CSS -->
 		<link href="asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
@@ -168,7 +168,7 @@
 								<option th:selected="${user!=null}?${authority.id == user.authority.id}" th:value="${authority.id}" th:each="dept:${authoritys}" th:text="${authority.name}">1</option>
 							</select>
 						</div>-->
-						<button type="submit" class="btn btn-primary" th:text="'添加'">添加</button>
+						<button type="submit" class="btn btn-primary" th:text="'分析'">分析</button>
 						</div>
 					</form>
 				</main>
