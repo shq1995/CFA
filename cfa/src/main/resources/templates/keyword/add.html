@@ -79,7 +79,12 @@
 							</div>
 							<div class="form-group">
 								<label>关键字权重</label>
-								<input name="weight" type="text" class="form-control" placeholder="请输入关键字权重" th:value="${filesKeyword!=null}?${filesKeyword.weight}">
+								<select class="form-control" name="weight" th:value="${filesKeyword!=null}?${filesKeyword.weight}">
+									<option >1</option>
+									<option >2</option>
+									<option >3</option>
+								</select>
+							<!--	<input name="weight" type="text" class="form-control" placeholder="请输入关键字权重" th:value="${filesKeyword!=null}?${filesKeyword.weight}">-->
 							</div>
 						<button type="submit" class="btn btn-primary" th:text="'添加'">添加</button>
 						</div>
