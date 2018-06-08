@@ -117,7 +117,7 @@ public class FilesServiceImpl implements FilesService {
 					list.add(criteriaBuilder.like(root.get("title").as(String.class),  "%"+title+"%"));
 				}
 				if(null!=number&&!"".equals(number)){
-					list.add(criteriaBuilder.equal(root.get("number").as(String.class), number));
+					list.add(criteriaBuilder.like(root.get("number").as(String.class), "%"+number+"%"));
 				}
 				if(null!=type&&!"".equals(type)){
 					list.add(criteriaBuilder.equal(root.get("type").as(String.class), type));
