@@ -292,8 +292,8 @@ public class FilesController {
         filesService.saveFile(file);
         if (file.getKeyword()!=null&&file.getKeyword()!="") {
             String[] fileKeyword = file.getKeyword().split("，");
-            FilesKeyword filesKeyword = new FilesKeyword();
             for (int i = 0; i < fileKeyword.length; i++) {
+                FilesKeyword filesKeyword = new FilesKeyword();
                 filesKeyword.setType(2);
                 filesKeyword.setKeyword(fileKeyword[i]);
                 filesKeyword.setWeight(1.0f);
@@ -321,8 +321,8 @@ public class FilesController {
         filesService.saveFile(file);
         if (file.getKeyword()!=null&&file.getKeyword()!="") {
             String[] fileKeyword = file.getKeyword().split("，");
-            FilesKeyword filesKeyword = new FilesKeyword();
             for (int i = 0; i < fileKeyword.length; i++) {
+                FilesKeyword filesKeyword = new FilesKeyword();
                 filesKeyword.setType(3);
                 filesKeyword.setKeyword(fileKeyword[i]);
                 filesKeyword.setWeight(1.0f);
@@ -350,8 +350,8 @@ public class FilesController {
         filesService.saveFile(file);
         if (file.getKeyword()!=null&&file.getKeyword()!="") {
             String[] fileKeyword = file.getKeyword().split("，");
-            FilesKeyword filesKeyword = new FilesKeyword();
             for (int i = 0; i < fileKeyword.length; i++) {
+                FilesKeyword filesKeyword = new FilesKeyword();
                 filesKeyword.setType(1);
                 filesKeyword.setKeyword(fileKeyword[i]);
                 filesKeyword.setWeight(1.0f);
@@ -379,8 +379,8 @@ public class FilesController {
         filesService.saveFile(file);
         if (file.getKeyword()!=null&&file.getKeyword()!="") {
             String[] fileKeyword = file.getKeyword().split("，");
-            FilesKeyword filesKeyword = new FilesKeyword();
             for (int i = 0; i < fileKeyword.length; i++) {
+                FilesKeyword filesKeyword = new FilesKeyword();
                 filesKeyword.setType(4);
                 filesKeyword.setKeyword(fileKeyword[i]);
                 filesKeyword.setWeight(1.0f);
@@ -408,8 +408,8 @@ public class FilesController {
         filesService.saveFile(file);
         if (file.getKeyword()!=null&&file.getKeyword()!="") {
             String[] fileKeyword = file.getKeyword().split("，");
-            FilesKeyword filesKeyword = new FilesKeyword();
             for (int i = 0; i < fileKeyword.length; i++) {
+                FilesKeyword filesKeyword = new FilesKeyword();
                 filesKeyword.setType(file.getType());
                 filesKeyword.setKeyword(fileKeyword[i]);
                 filesKeyword.setWeight(1.0f);
