@@ -74,6 +74,8 @@ public class KeywordController {
         if ((filesKeywordService.findByTypeAndKeyword(filesKeyword.getType(),filesKeyword.getKeyword()))!=null){
             FilesType filesType = filesTypeService.getFilesTypeById(filesKeyword.getType());
             model.addAttribute("err", filesType.getName()+"里该关键字已存在！");
+            List<FilesType> filesTypes = filesTypeService.findAll();
+            model.addAttribute("types",filesTypes);
             Map<String,Object> map = new HashMap<>();
             map.put("filesKeyword",filesKeyword);
             return new ModelAndView("keyword/add",map);
@@ -103,6 +105,15 @@ public class KeywordController {
             Map<String,Object> map = new HashMap<>();
             map.put("filesKeyword",filesKeyword);
             return new ModelAndView("keyword/edit");
+        }
+        if ((filesKeywordService.findByTypeAndKeyword(filesKeyword.getType(),filesKeyword.getKeyword()))!=null){
+            FilesType filesType = filesTypeService.getFilesTypeById(filesKeyword.getType());
+            model.addAttribute("err", filesType.getName()+"里该关键字已存在！");
+            List<FilesType> filesTypes = filesTypeService.findAll();
+            model.addAttribute("types",filesTypes);
+            Map<String,Object> map = new HashMap<>();
+            map.put("filesKeyword",filesKeyword);
+            return new ModelAndView("keyword/edit",map);
         }
         System.out.println("修改的关键字数据："+filesKeyword);
         filesKeywordService.save(filesKeyword);
