@@ -54,7 +54,7 @@
 				<div th:replace="commons/bar::#sidebar(activeUri='others')"></div>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<p style="text-align:center; color: #b3d7ff" th:text="${msg}"></p>
+					<p style="text-align:center; color: blue" th:text="${msg}"></p>
 					<div class="row">
 						<div class="col-md-3">
 							<a class="btn btn-sm btn-success" href="user" th:href="@{/othersadd}">其它案卷添加</a>
@@ -104,7 +104,7 @@
 									<td th:text="${file.agentDepartment}"></td>
 									<td th:text="${#dates.format(file.updateTime, 'yyyy-MM-dd HH:mm')}"></td>
 									<td>
-										<a class="btn btn-sm btn-primary" th:href="@{/securityfile/}+${file.id}">编辑</a>
+										<a class="btn btn-sm btn-primary" th:href="@{/othersfile/}+${file.id}">编辑</a>
 										<button th:attr="del_uri=@{/othersfile/}+${file.id}" class="btn btn-sm btn-danger deleteBtn">删除</button>
 									</td>
 								</tr>

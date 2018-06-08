@@ -55,7 +55,7 @@
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 					<!--需要区分是员工修改还是添加；-->
-					<form th:action="@{/penalfile}" method="post">
+					<form th:action="@{/othersfile}" method="post">
 						<!--发送put请求修改员工数据-->
 						<!--
 						1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）
@@ -174,7 +174,7 @@
 								<option th:selected="${user!=null}?${authority.id == user.authority.id}" th:value="${authority.id}" th:each="dept:${authoritys}" th:text="${authority.name}">1</option>
 							</select>
 						</div>-->
-						<button type="submit" class="btn btn-primary" th:text="${'修改'">添加</button>
+						<button type="submit" class="btn btn-primary" th:text="'修改'">添加</button>
 						</div>
 					</form>
 				</main>

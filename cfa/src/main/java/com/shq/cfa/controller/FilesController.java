@@ -231,7 +231,7 @@ public class FilesController {
         //保存案件
         int index = 0;
         Float weights = 0f;
-        String content = file.getStartCause() + file.getStartDesc() + file.getEndCause() + file.getSummary();
+        String content = file.getStartCause() + file.getStartDesc() + file.getEndCause() + file.getSummary() + file.getContent() + file.getEndDesc();
         List<FilesType> filesTypes = filesTypeService.findAll();
         for (FilesType filesType : filesTypes){
             List<FilesKeyword> keywords = filesKeywordService.findByType(filesType.getId());
@@ -252,13 +252,13 @@ public class FilesController {
             boolean include = content.contains(keyword.getKeyword());
             if (include){
                 keyword.setWeight(keyword.getWeight()+0.01f);
-                filesKeywordService.save(keyword);
+                filesKeywordService.update(keyword);
             }
         }
         if (file.getKeyword()!=null&&file.getKeyword()!="") {
             String[] fileKeyword = file.getKeyword().split("，");
-            FilesKeyword filesKeyword = new FilesKeyword();
             for (int i = 0; i < fileKeyword.length; i++) {
+                FilesKeyword filesKeyword = new FilesKeyword();
                 filesKeyword.setType(index);
                 filesKeyword.setKeyword(fileKeyword[i]);
                 filesKeyword.setWeight(1.0f);
